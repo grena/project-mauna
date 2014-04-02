@@ -49,6 +49,9 @@
     background-image: -o-linear-gradient(top,#f1f1f1,#ddd7d7);
     background-image: linear-gradient(top,#f1f1f1,#ddd7d7);
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f1f1f1', EndColorStr='#ddd7d7')";
+    /* Pour les a */
+    text-decoration: none;
+    color: #454545;
 }
 
 .ma-button:active:not(:disabled) {
