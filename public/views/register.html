@@ -1,0 +1,86 @@
+<div id="register" class="row">
+    <div class="col-md-6 col-md-offset-3 well">
+        <div class="alert alert-dismissable alert-info">
+            <strong><i class="fa fa-info-circle"></i> Information :</strong> Les citoyens déjà recensés sont invités à <a href="#/login" class="alert-link">s'identifier</a>.
+        </div>
+        <form class="form-horizontal">
+            <fieldset>
+                <legend>Formulaire de recensement A.R.C.A.</legend>
+                <div>
+                    <blockquote>
+                        <p>Tout(e) citoyen(ne) vivant au sein d'une colonie classifiée habitable par une confédération minière, se doit d'être recensé(e).</p>
+                        <small>Jane Fong, <cite title="Source Title">Ambassadrice Terrienne des Secteurs Fragmentés</cite></small>
+                    </blockquote>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control input-sm" id="inputEmail" placeholder="Email" ng-model="user.email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                    <div class="col-lg-10">
+                        <input type="password" class="form-control input-sm" id="inputPassword" placeholder="Password" ng-model="user.password">
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="inputPassword" class="col-lg-2 control-label">Vaccinations</label>
+                    <div class="col-lg-5">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" checked="checked"> Salmonelle de l'espace
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" checked="checked"> Encore une autre
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" checked="checked"> Phobie interplixienne
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" checked="checked"> Salmonelle de l'espace
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" checked="checked"> Encore une autre
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" checked="checked"> Phobie interplixienne
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="inputPassword" class="col-lg-2 control-label">Charte</label>
+                    <div class="col-lg-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="acceptTerms"> J'autorise la TetraCorp&trade; à analyser ces informations et à me promouvoir officiellement <strong>colon de grade Alpha</strong>.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="col-lg-12 text-center">
+                        <button type="submit" class="ma-button" ng-click="register()"><i class="fa fa-check"></i> Valider mon recensement</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

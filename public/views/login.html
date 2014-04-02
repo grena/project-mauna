@@ -1,0 +1,46 @@
+<div id="login" class="row">
+    <div class="col-md-4 col-md-offset-4 well">
+        <form class="form-horizontal" ng-submit="login()">
+            <fieldset>
+                <legend>Authentification</legend>
+                <div class="form-group">
+                    <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                        <input required ng-model="credentials.email" type="text" class="form-control input-sm" id="inputEmail" placeholder="Email" tabindex="1">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                    <div class="col-lg-10">
+                        <input required ng-model="credentials.password" type="password" class="form-control input-sm" id="inputPassword" placeholder="Password" tabindex="2">
+                        <span class="help-block pull-right"><a href="">Mot de passe oublié ?</a></span>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" tabindex="3"> Rester connecté
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" class="ma-button" tabindex="4">Continuer</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+        <hr>
+
+        <div>
+            <p>
+                <small>
+                    <strong>Rappel :</strong> Si vous n'avez pas encore été inscrit par l'organisme de recensement de la TetraCorp&trade; - <i>ou l'un de ses membres abilités</i> -, veuillez procéder au remplissage du formulaire <abbr title="Auto-Recensement pour Colonie Autonome">A.R.C.A.</abbr> prévu à cet effet.
+                </small>
+            </p>
+            <p class="text-center">
+                <br>
+                <button ng-click="go('/register')" class="ma-button action"><i class="fa fa-book"></i> Remplir le formulaire A.R.C.A.</button>
+            </p>
+        </div>
+    </div>
+</div>

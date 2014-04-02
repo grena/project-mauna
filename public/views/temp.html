@@ -1,0 +1,76 @@
+<!doctype html>
+
+<html ng-app="app">
+
+    <head>
+        <meta charset="utf-8">
+        <title>The Mauna Project.</title>
+
+        <link rel="stylesheet" href="/vendor/yeti-bootstrap/bootstrap.css">
+        <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/mauna.css">
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">The Mauna Project.</a>
+                </div>
+                <div class="navbar-collapse collapse navbar-responsive-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Colonie</a></li>
+                        <li><a href="#">Personnage</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mon compte <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Paramètres</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Déconnexion</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <ng-view></ng-view>
+
+            <div>
+                <div>
+                    <button class="ma-button"><i class="fa fa-check"></i> Accepter</button>
+                    <button class="ma-button danger"><i class="fa fa-times"></i> Refuser</button>
+                    <button class="ma-button action"><i class="fa fa-eye"></i> Construire</button>
+                    <button class="btn btn-info">Bien ouaij mec</button>
+                    <a href="">Ai perdu mon password !</a>
+                </div>
+
+                <h2>Example body text</h2>
+                <p>Nullam quis risus eget <a href="#">urna mollis ornare</a> vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
+                <p><small>This line of text is meant to be treated as fine print.</small></p>
+                <p>The following snippet of text is <strong>rendered as bold text</strong>.</p>
+                <p>The following snippet of text is <em>rendered as italicized text</em>.</p>
+                <p>An abbreviation of the word attribute is <abbr title="attribute">attr</abbr>.</p>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width: 80%;"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- SCRIPTS -->
+        <script src="vendor/angular/angular.min.js"></script>
+        <script src="vendor/angular-route/angular-route.min.js"></script>
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>
