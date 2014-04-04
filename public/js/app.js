@@ -1,6 +1,32 @@
 'use strict';
 
-var app = angular.module('app', ['ui.router']);
+var app = angular.module('app', [
+    'ui.router']);
+
+app.config(function($httpProvider) {
+
+    var logsOutUserOn401 = function($location, $q, SessionService) {
+        var success = function(response) {
+            return response;
+        };
+
+        var error = function(response) {
+            if(response.status === 401) {
+                SessionService.unset('authenticated');
+                $location.path('/login');
+                // FlashService.show(response.data.flash);
+            }
+            return $q.reject(response);
+        };
+
+        return function(promise) {
+            return promise.then(success, error);
+        };
+    };
+
+    $httpProvider.responseInterceptors.push(logsOutUserOn401);
+
+});
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
@@ -9,8 +35,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: '/',
             templateUrl: 'views/home.html'
         })
+        .state('register', {
+            url: '/register',
+            templateUrl: 'views/register.html',
+            controller: 'RegisterCtrl'
+        })
         .state('login', {
             url: '/login',
+            templateUrl: 'views/login.html',
+            controller: 'LoginCtrl'
+        })
+        .state('lost_password', {
+            url: '/lostpassword',
             templateUrl: 'views/login.html',
             controller: 'LoginCtrl'
         })
@@ -18,22 +54,22 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: '/dashboard',
             templateUrl: 'views/dashboard.html',
             controller: 'DashboardCtrl'
-        })
-        .state('register', {
-            url: '/register',
-            templateUrl: 'views/register.html',
-            controller: 'RegisterCtrl'
         });
+
 });
 
 app.run(function($rootScope, $location, AuthenticationService) {
 
-    var publicRoutes = ['/login', '/register'];
+    var publicRoutes = ['/login', '/register', '/'];
+
+    $rootScope.isAuthenticated = AuthenticationService.isLoggedIn();
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
         if( !_(publicRoutes).contains($location.path()) && !AuthenticationService.isLoggedIn() )
         {
             $location.path('/login');
+            event.preventDefault();
+            event.stopPropagation();
         }
     });
 
@@ -53,7 +89,7 @@ app.factory('SessionService', function() {
     };
 });
 
-app.factory('AuthenticationService', function($http, $location, SessionService) {
+app.factory('AuthenticationService', function($rootScope, $http, $location, SessionService) {
 
     var cacheSession = function() {
         SessionService.set('authenticated', true);
@@ -66,13 +102,21 @@ app.factory('AuthenticationService', function($http, $location, SessionService) 
     return {
         login: function(credentials) {
             var login = $http.post("/auth/login", credentials);
-            login.success(cacheSession);
+
+            login.success(function() {
+                cacheSession();
+                $rootScope.isAuthenticated = true;
+            });
 
             return login;
         },
         logout: function() {
             var logout = $http.get("/auth/logout");
-            logout.success(uncacheSession);
+
+            logout.success(function() {
+                uncacheSession();
+                $rootScope.isAuthenticated = false;
+            });
 
             return logout;
         },
@@ -97,14 +141,19 @@ app.controller('LoginCtrl', function($scope, $location, NavigationService, Authe
         password : ''
     };
 
+    $scope.load = false;
+
     $scope.go = function (path) {
         NavigationService.go(path);
     };
 
     $scope.login = function() {
+
+        $scope.load = true;
+
         AuthenticationService.login($scope.credentials)
             .success(function() {
-
+                $location.path('/dashboard');
             });
     };
 });
@@ -129,5 +178,22 @@ app.controller('HomeCtrl', function() {
 });
 
 app.controller('DashboardCtrl', function() {
+
+});
+
+app.controller('NavbarCtrl', function($rootScope, $scope, $location, AuthenticationService) {
+
+    $scope.loggedIn = $rootScope.isAuthenticated;
+
+    $rootScope.$watch('isAuthenticated', function(value) {
+        $scope.loggedIn = value;
+    });
+
+    $scope.logout = function() {
+        AuthenticationService.logout()
+            .success(function() {
+                $location.path('/login');
+            });
+    };
 
 });
