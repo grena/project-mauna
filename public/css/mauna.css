@@ -126,3 +126,15 @@ hr {
 body {
     background-color: rgb(246, 246, 242);
 }
+
+#toast-container > div {
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    box-shadow: 1px 1px 0px #000000;
+    -webkit-box-shadow: 1px 1px 0px #000000;
+}
+
+#toast-container > :hover {
+    box-shadow: 1px 1px 0px #000000;
+    -webkit-box-shadow: 1px 1px 0px #000000;
+}
