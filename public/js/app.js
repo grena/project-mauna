@@ -108,12 +108,17 @@ app.factory('AuthenticationService', function($rootScope, $http, $location, Sess
                 $rootScope.isAuthenticated = true;
             });
 
+            login.error(function(response) {
+                toastr.error(response.flash, 'Erreur !');
+            });
+
             return login;
         },
         logout: function() {
             var logout = $http.get("/auth/logout");
 
-            logout.success(function() {
+            logout.success(function(response) {
+                toastr.success(response.flash);
                 uncacheSession();
                 $rootScope.isAuthenticated = false;
             });
@@ -154,6 +159,9 @@ app.controller('LoginCtrl', function($scope, $location, NavigationService, Authe
         AuthenticationService.login($scope.credentials)
             .success(function() {
                 $location.path('/dashboard');
+            })
+            .error(function(response) {
+                $scope.load = false;
             });
     };
 });

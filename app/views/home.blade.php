@@ -8,6 +8,7 @@
         <title>The Mauna Project.</title>
         <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="/css/yeti-bootstrap/bootstrap.css">
+        <link rel="stylesheet" href="/vendor/toastr/toastr.css">
         <link rel="stylesheet" href="/css/mauna.css">
 
         <script src="vendor/angular/angular.min.js"></script>
@@ -16,6 +17,7 @@
         <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="vendor/restangular/dist/restangular.min.js"></script>
         <script src="vendor/lodash/dist/lodash.min.js"></script>
+        <script src="vendor/toastr/toastr.min.js"></script>
         <script src="js/app.js"></script>
 
         <script>
