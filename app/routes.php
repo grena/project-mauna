@@ -16,5 +16,13 @@ Route::get('/', function()
     return View::make('home');
 });
 
-Route::post('/auth/login', ['before' => 'csrf_json', 'uses' => 'AuthController@login']);
-Route::get('/auth/logout', ['uses' => 'AuthController@logout']);
+Route::group(array('before' => 'csrf'), function ()
+{
+    Route::post('/auth/login', ['before' => 'csrf_json', 'uses' => 'AuthController@login']);
+    Route::get('/auth/logout', ['uses' => 'AuthController@logout']);
+});
+
+Route::group(array('before' => 'auth|csrf'), function ()
+{
+    Route::resource('user', 'UserController');
+});

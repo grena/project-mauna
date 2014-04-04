@@ -1,7 +1,8 @@
 'use strict';
 
 var app = angular.module('app', [
-    'ui.router']);
+    'ui.router',
+    'restangular']);
 
 app.config(function($httpProvider) {
 
@@ -53,9 +54,21 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state('dashboard', {
             url: '/dashboard',
             templateUrl: 'views/dashboard.html',
-            controller: 'DashboardCtrl'
+            controller: 'DashboardCtrl',
+            resolve: {
+                // Retrieve user informations
+                user: function(Restangular) {
+                    return Restangular.one('user', 1).get();
+                }
+            }
         });
 
+});
+
+app.config(function ($httpProvider, CSRF_TOKEN) {
+    $httpProvider.defaults.useXDomain = true;
+    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] = CSRF_TOKEN;
 });
 
 app.run(function($rootScope, $location, AuthenticationService) {
@@ -185,8 +198,8 @@ app.controller('HomeCtrl', function() {
 
 });
 
-app.controller('DashboardCtrl', function() {
-
+app.controller('DashboardCtrl', function($scope, user) {
+    $scope.user = user;
 });
 
 app.controller('NavbarCtrl', function($rootScope, $scope, $location, AuthenticationService) {

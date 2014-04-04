@@ -35,7 +35,14 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('login');
+    if (!Sentry::check())
+    {
+        Log::error('Sentry reject user with auth filter');
+
+        return Response::json([
+            'flash' => 'Vous êtes déconnecté',
+            'dev_error' => 'user not connected'], 401);
+    }
 });
 
 
@@ -73,8 +80,15 @@ Route::filter('guest', function()
 
 Route::filter('csrf', function()
 {
-	if (Session::token() != Input::get('_token'))
-	{
-		throw new Illuminate\Session\TokenMismatchException;
-	}
+	// if (Session::token() != Input::get('_token'))
+	// {
+	// 	throw new Illuminate\Session\TokenMismatchException;
+	// }
+
+    $token = Request::ajax() ? Request::header('X-CSRF-Token') : Input::get('_token');
+
+    if (Session::token() != $token)
+    {
+        throw new Illuminate\Session\TokenMismatchException;
+    }
 });
