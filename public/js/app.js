@@ -4,7 +4,7 @@ var app = angular.module('app', [
     'ui.router',
     'restangular']);
 
-app.config(function($httpProvider, $stateProvider) {
+app.config(function($httpProvider) {
 
     var logsOutUserOn401 = ['$q', '$injector', 'SessionService', function($q, $injector, SessionService) {
         var success = function(response) {
