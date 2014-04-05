@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/Freyskeyd/project-mauna.git"
+    "url": "git@github.com:grena/project-mauna.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Freyskeyd/project-mauna/issues"
+    "url": "https://github.com/grena/project-mauna/issues"
   },
-  "homepage": "https://github.com/Freyskeyd/project-mauna",
+  "homepage": "https://github.com/grena/project-mauna",
   "devDependencies": {
     "gulp": "^3.6.0"
   }
