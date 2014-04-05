@@ -15,7 +15,7 @@
 git clone git@github.com:grena/project-mauna.git && cd project-mauna
 
 # Install base libraries
-npm i --silent && bower install --quiet && composer install -q
+npm i && bower install && composer install
 
 # Database Setup
 
