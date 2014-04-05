@@ -34,20 +34,24 @@ app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('home', {
             url: '/',
+            public: true,
             templateUrl: 'views/home.html'
         })
         .state('register', {
             url: '/register',
+            public: true,
             templateUrl: 'views/register.html',
             controller: 'RegisterCtrl'
         })
         .state('login', {
             url: '/login',
+            public: true,
             templateUrl: 'views/login.html',
             controller: 'LoginCtrl'
         })
         .state('lost_password', {
             url: '/lostpassword',
+            public: true,
             templateUrl: 'views/login.html',
             controller: 'LoginCtrl'
         })
@@ -90,18 +94,18 @@ app.config(function (RestangularProvider) {
     });
 });
 
-app.run(function($rootScope, $location, AuthenticationService) {
+app.run(function($rootScope, $location, $state, AuthenticationService) {
 
-    var publicRoutes = ['/login', '/register', '/'];
-
+    // Let's check if the user is auth
     $rootScope.isAuthenticated = AuthenticationService.isLoggedIn();
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-        if( !_(publicRoutes).contains($location.path()) && !AuthenticationService.isLoggedIn() )
+
+        // If it's not a public route and the user is not authenticated, redirects him to login
+        if( !toState.public && !$rootScope.isAuthenticated )
         {
-            $location.path('/login');
+            $state.transitionTo('login');
             event.preventDefault();
-            event.stopPropagation();
         }
     });
 
