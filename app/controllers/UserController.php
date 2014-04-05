@@ -43,12 +43,12 @@ class UserController extends \BaseController {
 	    $user = User::find($id);
 
 	    if ($user) {
-	        return Response::json($user->toArray(), 200);
+	        return Response::json($user, 200);
 	    }
 
 	    return Response::json([
-	        'flash'     => "Erreur d'authentification",
-	        'dev_error' => 'User not found'
+	        'flash'     => "Erreur",
+	        'dev_error' => sprintf('User not found with id = %d', $id)
 	    ], 400);
 	}
 
