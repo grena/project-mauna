@@ -55,7 +55,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'views/dashboard.html',
             controller: 'DashboardCtrl'
         });
-
+    $urlRouterProvider.otherwise('login');
 });
 
 app.run(function($rootScope, $location, AuthenticationService) {
