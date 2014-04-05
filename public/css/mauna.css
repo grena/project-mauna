@@ -138,3 +138,7 @@ body {
     box-shadow: 1px 1px 0px #000000;
     -webkit-box-shadow: 1px 1px 0px #000000;
 }
+
+.vanished {
+    opacity: 0.3;
+}
