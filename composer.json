@@ -9,6 +9,9 @@
 		"nesbot/Carbon": "*",
 		"cartalyst/sentry": "2.1.*"
 	},
+	"require-dev": {
+	    "way/generators": "2.*"
+	},
 	"autoload": {
 		"classmap": [
 			"app/commands",
