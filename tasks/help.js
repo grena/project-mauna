@@ -27,6 +27,7 @@ module.exports = function (gulp) {
 
             gutil.log('- ', gutil.colors.cyan(item.name), diff.join(' '), gutil.colors.yellow(item.describe));
         });
+        
         return promise.promise;
     });
 
