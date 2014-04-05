@@ -65,6 +65,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         });
 
+    $urlRouterProvider.otherwise('login');
 });
 
 app.config(function ($httpProvider, CSRF_TOKEN) {
