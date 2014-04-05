@@ -4,7 +4,7 @@
 
 #### Global
 ```
-git clone https://github.com/grena/project-mauna.git && cd project-mauna
+git clone git@github.com:grena/project-mauna.git && cd project-mauna
 composer install
 npm install
 bower install
