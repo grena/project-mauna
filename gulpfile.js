@@ -1,7 +1,11 @@
 var gulp = require('gulp');
-var less = require('gulp-less');
-var path = require('path');
+require('gulp-load')(gulp);
 
-gulp.task('default', function() {
+/*
+|--------------------------------------------------------------------------
+| Fetch all tasks
+|--------------------------------------------------------------------------
+*/
+gulp.loadTasks(__dirname);
 
-});
+gulp.task('default', ['help']);
