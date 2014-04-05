@@ -1,16 +1,11 @@
-var gulp = require('gulp'),
-    glob = require('glob');
+var gulp = require('gulp');
+require('gulp-load')(gulp);
 
 /*
 |--------------------------------------------------------------------------
 | Fetch all tasks
 |--------------------------------------------------------------------------
 */
-var files = glob.sync('./tasks/**/*.js');
-files.forEach(function (file) {
-    'use strict';
-    require(file)(gulp);
-});
-
+gulp.loadTasks(__dirname);
 
 gulp.task('default', ['help']);

@@ -17,8 +17,8 @@
   },
   "homepage": "https://github.com/grena/project-mauna",
   "devDependencies": {
-    "glob": "^3.2.9",
     "gulp": "^3.6.0",
+    "gulp-load": "^0.1.1",
     "gulp-util": "^2.2.14",
     "lodash": "^2.4.1",
     "q": "^1.0.1"
