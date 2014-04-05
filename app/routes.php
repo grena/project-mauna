@@ -25,4 +25,5 @@ Route::group(array('before' => 'csrf'), function ()
 Route::group(array('before' => 'auth|csrf'), function ()
 {
     Route::resource('user', 'UserController');
+    Route::resource('user.settlers','SettlerController');
 });
