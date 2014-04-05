@@ -56,9 +56,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'views/dashboard.html',
             controller: 'DashboardCtrl',
             resolve: {
-                // Retrieve user informations
                 user: function(Restangular) {
                     return Restangular.one('user', 1).get();
+                },
+                settlers: function(Restangular) {
+                    return Restangular.one('user', 1).getList('settlers');
                 }
             }
         });
@@ -69,6 +71,22 @@ app.config(function ($httpProvider, CSRF_TOKEN) {
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     $httpProvider.defaults.headers.common['X-CSRF-Token'] = CSRF_TOKEN;
+});
+
+app.config(function (RestangularProvider) {
+    RestangularProvider.setResponseExtractor(function(response) {
+      var newResponse = response;
+      if (angular.isArray(response)) {
+        angular.forEach(newResponse, function(value, key) {
+          // newResponse[key].originalElement = angular.copy(value);
+          newResponse.originalElement[key] = angular.copy(value);
+        });
+      } else {
+        newResponse.originalElement = angular.copy(response);
+      }
+
+      return newResponse;
+    });
 });
 
 app.run(function($rootScope, $location, AuthenticationService) {
@@ -198,8 +216,30 @@ app.controller('HomeCtrl', function() {
 
 });
 
-app.controller('DashboardCtrl', function($scope, user) {
-    $scope.user = user;
+app.controller('DashboardCtrl', function($scope, user, settlers) {
+
+    $scope.user = user.originalElement;
+    $scope.settlers = settlers;
+
+    $scope.actions = {
+        create: {
+            selected: false
+        },
+        join: {
+            selected: false
+        }
+    };
+
+    $scope.create = function() {
+        $scope.actions.create.selected = true;
+        $scope.actions.join.selected = false;
+    };
+
+    $scope.join = function() {
+        $scope.actions.create.selected = false;
+        $scope.actions.join.selected = true;
+    };
+
 });
 
 app.controller('NavbarCtrl', function($rootScope, $scope, $location, AuthenticationService) {
