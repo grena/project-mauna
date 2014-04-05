@@ -59,4 +59,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->email;
 	}
 
+    /**
+     * A User has many Settlers
+     */
+    public function settlers()
+    {
+        return $this->hasMany('Settler');
+    }
+
 }
