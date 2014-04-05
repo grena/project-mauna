@@ -4,9 +4,9 @@ var app = angular.module('app', [
     'ui.router',
     'restangular']);
 
-app.config(function($httpProvider) {
+app.config(function($httpProvider, $stateProvider) {
 
-    var logsOutUserOn401 = function($location, $q, SessionService) {
+    var logsOutUserOn401 = ['$q', '$injector', 'SessionService', function($q, $injector, SessionService) {
         var success = function(response) {
             return response;
         };
@@ -14,8 +14,8 @@ app.config(function($httpProvider) {
         var error = function(response) {
             if(response.status === 401) {
                 SessionService.unset('authenticated');
-                $location.path('/login');
-                // FlashService.show(response.data.flash);
+                // Inject service $state after init of $http
+                $injector.get('$state').transitionTo('login');
             }
             return $q.reject(response);
         };
@@ -23,7 +23,7 @@ app.config(function($httpProvider) {
         return function(promise) {
             return promise.then(success, error);
         };
-    };
+    }];
 
     $httpProvider.responseInterceptors.push(logsOutUserOn401);
 
@@ -94,7 +94,7 @@ app.config(function (RestangularProvider) {
     });
 });
 
-app.run(function($rootScope, $location, $state, AuthenticationService) {
+app.run(function($rootScope, $state, AuthenticationService) {
 
     // Let's check if the user is auth
     $rootScope.isAuthenticated = AuthenticationService.isLoggedIn();
@@ -125,7 +125,7 @@ app.factory('SessionService', function() {
     };
 });
 
-app.factory('AuthenticationService', function($rootScope, $http, $location, SessionService) {
+app.factory('AuthenticationService', function($rootScope, $http, SessionService) {
 
     var cacheSession = function() {
         SessionService.set('authenticated', true);
@@ -167,15 +167,7 @@ app.factory('AuthenticationService', function($rootScope, $http, $location, Sess
     };
 });
 
-app.factory('NavigationService', function($location) {
-    return {
-        go: function(path) {
-            $location.path(path);
-        }
-    };
-});
-
-app.controller('LoginCtrl', function($scope, $location, NavigationService, AuthenticationService) {
+app.controller('LoginCtrl', function($scope, $state, AuthenticationService) {
 
     $scope.credentials = {
         email : '',
@@ -184,17 +176,13 @@ app.controller('LoginCtrl', function($scope, $location, NavigationService, Authe
 
     $scope.load = false;
 
-    $scope.go = function (path) {
-        NavigationService.go(path);
-    };
-
     $scope.login = function() {
 
         $scope.load = true;
 
         AuthenticationService.login($scope.credentials)
             .success(function() {
-                $location.path('/dashboard');
+                $state.transitionTo('dashboard');
             })
             .error(function(response) {
                 $scope.load = false;
@@ -202,15 +190,11 @@ app.controller('LoginCtrl', function($scope, $location, NavigationService, Authe
     };
 });
 
-app.controller('RegisterCtrl', function($scope, $location, NavigationService) {
+app.controller('RegisterCtrl', function($scope) {
 
     $scope.user = {
         email : '',
         password : ''
-    };
-
-    $scope.go = function (path) {
-        NavigationService.go(path);
     };
 
     $scope.register = function() {
@@ -247,7 +231,7 @@ app.controller('DashboardCtrl', function($scope, user, settlers) {
 
 });
 
-app.controller('NavbarCtrl', function($rootScope, $scope, $location, AuthenticationService) {
+app.controller('NavbarCtrl', function($rootScope, $scope, $state, AuthenticationService) {
 
     $scope.loggedIn = $rootScope.isAuthenticated;
 
@@ -258,7 +242,7 @@ app.controller('NavbarCtrl', function($rootScope, $scope, $location, Authenticat
     $scope.logout = function() {
         AuthenticationService.logout()
             .success(function() {
-                $location.path('/login');
+                $state.transitionTo('login');
             });
     };
 
