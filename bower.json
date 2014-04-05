@@ -18,7 +18,9 @@
     "angular-elastic": "~2.3.1",
     "angular-route": "~1.2.15",
     "angular-ui-router": "~0.2.10",
-    "toastr": "~2.0.1"
+    "toastr": "~2.0.1",
+    "requirejs": "~2.1.11",
+    "requirejs-domready": "~2.0.1"
   },
   "resolutions": {
     "angular": "1.2.15"
