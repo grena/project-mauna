@@ -69,7 +69,7 @@
                     <div class="col-lg-10">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" ng-model="acceptTerms"> J'autorise la TetraCorp&trade; à analyser ces informations et à me promouvoir officiellement <strong>colon de grade Alpha</strong>.
+                                <input type="checkbox" ng-model="terms"> J'autorise la TetraCorp&trade; à analyser ces informations et à me promouvoir officiellement <strong>colon de grade Alpha</strong>.
                             </label>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                 <hr>
                 <div class="form-group">
                     <div class="col-lg-12 text-center">
-                        <button type="submit" class="ma-button" ng-click="register()"><i class="fa fa-check"></i> Valider mon recensement</button>
+                        <button type="submit" class="ma-button" ng-click="register()" ng-disabled="load || !terms"><i class="fa fa-check"></i> Valider mon recensement <i class="fa fa-spin fa-cog" ng-show="load"></i></button>
                     </div>
                 </div>
             </fieldset>

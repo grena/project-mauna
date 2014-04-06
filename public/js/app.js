@@ -61,10 +61,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
             controller: 'DashboardCtrl',
             resolve: {
                 user: function(Restangular) {
-                    return Restangular.one('user', 1).get();
+                    return Restangular.one('users', 1).get();
                 },
                 settlers: function(Restangular) {
-                    return Restangular.one('user', 1).getList('settlers');
+                    return Restangular.one('users', 1).getList('settlers');
                 }
             }
         });
@@ -161,6 +161,15 @@ app.factory('AuthenticationService', function($rootScope, $http, SessionService)
 
             return logout;
         },
+        register: function(user) {
+            var register = $http.post("/auth/register", user);
+
+            register.error(function(response) {
+                toastr.error(response.flash, 'Erreur !');
+            });
+
+            return register;
+        },
         isLoggedIn: function() {
             return SessionService.get('authenticated');
         }
@@ -190,14 +199,28 @@ app.controller('LoginCtrl', function($scope, $state, AuthenticationService) {
     };
 });
 
-app.controller('RegisterCtrl', function($scope) {
+app.controller('RegisterCtrl', function($scope, $state, AuthenticationService) {
 
     $scope.user = {
         email : '',
         password : ''
     };
 
+    $scope.load = false;
+    $scope.terms = false;
+
     $scope.register = function() {
+
+        $scope.load = true;
+
+        AuthenticationService.register($scope.user)
+            .success(function() {
+                toastr.success("Vous êtes désormais recensé par TetraCorp&trade;, vous pouvez vous connecter.", 'Bienvenue');
+                $state.transitionTo('login');
+            })
+            .error(function(response) {
+                $scope.load = false;
+            });
     };
 });
 

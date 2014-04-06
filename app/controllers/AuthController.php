@@ -55,4 +55,52 @@ class AuthController extends BaseController {
         return Response::json(['flash' => 'Logged Out!'], 200);
     }
 
+    public function register()
+    {
+        try
+        {
+            $input = Input::all();
+
+            $validation = [
+                'email' => 'required|email',
+                'password' => 'required'
+            ];
+
+            $validator = Validator::make($input, $validation);
+
+            if($validator->fails()) {
+                return Response::json(['flash' => $validator->messages()->first()], 500);
+            }
+
+            // Create the user
+            $user = Sentry::createUser(array(
+                'email'     => Input::get('email'),
+                'password'  => Input::get('password'),
+                'activated' => true,
+            ));
+
+            // Find the group using the group id
+            // $adminGroup = Sentry::findGroupById(1);
+
+            // Assign the group to the user
+            // $user->addGroup($adminGroup);
+        }
+        catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
+        {
+            return Response::json(['flash' => 'Login field is required.'], 500);
+        }
+        catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
+        {
+            return Response::json(['flash' => 'Password field is required.'], 500);
+        }
+        catch (Cartalyst\Sentry\Users\UserExistsException $e)
+        {
+            return Response::json(['flash' => 'User with this login already exists.'], 500);
+        }
+        catch (Cartalyst\Sentry\Groups\GroupNotFoundException $e)
+        {
+            return Response::json(['flash' => 'Group was not found.'], 500);
+        }
+    }
+
 }
