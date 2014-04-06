@@ -180,7 +180,8 @@ app.controller('LoginCtrl', function($scope, $state, AuthenticationService) {
 
     $scope.credentials = {
         email : '',
-        password : ''
+        password : '',
+        remember: true
     };
 
     $scope.load = false;
