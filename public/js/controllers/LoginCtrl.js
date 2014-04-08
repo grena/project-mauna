@@ -1,8 +1,18 @@
+/*
+|--------------------------------------------------------------------------
+| Controller de Login
+| Récupère angular + le module controller on crée donc une controller
+| Sur notre module déjà crée dans controllers/index
+|--------------------------------------------------------------------------
+*/
 define([
-    'app',
-], function(app) {
+    'angular',
+    'controllers/index'
+], function(angular, controller) {
 
-    app.controller('LoginCtrl', function($scope, $state, AuthenticationService) {
+    'use strict';
+
+    angular.module(controller.name).controller('LoginCtrl', function($scope, $state, AuthenticationService) {
 
         $scope.credentials = {
             email : '',

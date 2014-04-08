@@ -7,11 +7,15 @@
 */
 
 require(['require', 'common'], function (require) {
+    'use strict';
 
     // A cet instant le fichier common.js est chargé
     // On require ensuite notre app
+
     require(['angular', 'app'], function (angular) {
         // on a load la lib angularJS + notre fichier app.js
-        angular.bootstrap(document, ['app']);
+        require(['domReady!'], function (document) {
+            angular.bootstrap(document, ['app']);
+        });
     });
 });

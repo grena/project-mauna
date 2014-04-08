@@ -14,6 +14,7 @@ require.config({
         'bootstrap'        : '../vendor/bootstrap/dist/js/bootstrap.min',
         'restangular'      : '../vendor/restangular/dist/restangular.min',
         'toastr'           : '../vendor/toastr/toastr.min',
+        'domReady'         : '../vendor/requirejs-domready/domReady',
         'lodash'           : '../vendor/lodash/dist/lodash.min'
     },
     shim: {

@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html data-csrf-token="{% csrf_token() %}">
+<html>
 
     <head>
         <meta charset="utf-8">
@@ -27,6 +27,7 @@
     </head>
 
     <body>
+        <input type="hidden" name="csrf_token" value="{% csrf_token() %}">
 
         <div class="container">
 
