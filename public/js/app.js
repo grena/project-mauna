@@ -5,13 +5,14 @@ define([
     'routing',
     'services',
     'controllers',
+    'models',
     'angular-ui-router',
     'jquery',
     'bootstrap',
     'restangular',
     'toastr',
     'lodash'
-], function(angular, config, routing, services, controllers) {
+], function(angular, config, routing, services, controllers, models) {
 
     'use strict';
     /*
@@ -26,7 +27,8 @@ define([
         config.name,
         routing.name,
         services.name,
-        controllers.name
+        controllers.name,
+        models.name
     ]);
 
     app.run(function($rootScope, $state, AuthenticationService) {
