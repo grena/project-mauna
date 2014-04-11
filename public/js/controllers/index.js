@@ -10,5 +10,5 @@ define(['angular', 'services'], function (angular, services) {
 
     'use strict';
 
-    return angular.module('app.controllers', [services.name]);
+    return angular.module('app.controllers', [services.name, 'ui.router']);
 });

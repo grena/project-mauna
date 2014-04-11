@@ -4,6 +4,7 @@
 | Liste tous les controllers disponibles et retourne le module principal
 |--------------------------------------------------------------------------
 */
+
 define([
     'controllers/index',
     'controllers/dashboardCtrl',
@@ -14,6 +15,6 @@ define([
 ], function (controller) {
 
     'use strict';
-
+    
     return controller;
 });

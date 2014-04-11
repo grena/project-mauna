@@ -18,12 +18,13 @@ Route::get('/', function()
 
 Route::group(array('before' => 'csrf'), function ()
 {
-    Route::post('/auth/login', ['before' => 'csrf_json', 'uses' => 'AuthController@login']);
+    Route::post('/auth/login', ['uses' => 'AuthController@login']);
+    Route::post('/auth/register', ['uses' => 'AuthController@register']);
     Route::get('/auth/logout', ['uses' => 'AuthController@logout']);
 });
 
 Route::group(array('before' => 'auth|csrf'), function ()
 {
-    Route::resource('user', 'UserController');
-    Route::resource('user.settlers','SettlerController');
+    Route::resource('users', 'UserController');
+    Route::resource('users.settlers','SettlerController');
 });

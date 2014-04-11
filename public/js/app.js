@@ -1,3 +1,4 @@
+
 define([
     'angular',
     'config',
@@ -13,7 +14,6 @@ define([
 ], function(angular, config, routing, services, controllers) {
 
     'use strict';
-
     /*
     |--------------------------------------------------------------------------
     | At this point we have modules and lib loaded

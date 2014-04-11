@@ -12,27 +12,43 @@ define([
 
     'use strict';
 
-    angular.module(controller.name).controller('LoginCtrl', function($scope, $state, AuthenticationService) {
+    angular.module(controller.name).controller('LoginCtrl', [
+        '$scope', '$state', 'AuthenticationService',
+        function ($scope, $state, AuthenticationService) {
 
-        $scope.credentials = {
-            email : '',
-            password : ''
-        };
+            $scope.credentials = {
+                email : '',
+                password : ''
+            };
 
-        $scope.load = false;
+            $scope.load = false;
 
-        $scope.login = function() {
+            /*
+            |--------------------------------------------------------------------------
+            | Forgot password
+            |--------------------------------------------------------------------------
+            */
+            $scope.forgotPassword = function () {
 
-            $scope.load = true;
+            };
 
-            AuthenticationService.login($scope.credentials)
-                .success(function() {
-                    $state.transitionTo('dashboard');
-                })
-                .error(function(response) {
-                    $scope.load = false;
-                });
-        };
-    });
+            /*
+            |--------------------------------------------------------------------------
+            | Send credentials to API
+            |--------------------------------------------------------------------------
+            */
+            $scope.login = function() {
 
+                $scope.load = true;
+
+                AuthenticationService.login($scope.credentials)
+                    .success(function() {
+                        $state.transitionTo('dashboard');
+                    })
+                    .error(function(response) {
+                        $scope.load = false;
+                    });
+            };
+        }
+    ]);
 });
