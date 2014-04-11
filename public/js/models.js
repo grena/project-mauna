@@ -6,8 +6,8 @@
 */
 
 define([
-    'modals/index',
-    'modals/base'
+    'models/index',
+    'models/base'
 ], function (model) {
 
     'use strict';
