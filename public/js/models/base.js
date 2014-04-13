@@ -13,6 +13,20 @@ define([
     angular.module(model.name).service('Base', ['Helpers',
         function (Helpers) {
 
+            var setDirty = function (that, value) {
+
+                Object.defineProperty(that, 'dirty', {
+                    writable:true,
+                    configurable: true
+                });
+
+                Object.defineProperty(that, 'dirty', {
+                    value: value,
+                    writable:true,
+                    configurable: true
+                });
+            };
+
             var Base = function (properties) {
 
                 var that   = this;
@@ -64,10 +78,9 @@ define([
                                     writable: false
                                 });
 
-                                Object.defineProperty(this, 'dirty', {
-                                    value: true,
-                                    configurable: true
-                                });
+                                setDirty(that, true);
+
+                                console.log(that.dirty);
                             }
                         });
                     });
@@ -94,7 +107,6 @@ define([
                     if ( _.has( that.attributes, key ) ) {
 
                         that[key] = value;
-
                     }
 
                 });
@@ -119,10 +131,7 @@ define([
                     writable: false
                 });
 
-                Object.defineProperty(this, 'dirty', {
-                    value: false,
-                    configurable: true
-                });
+                setDirty(this, false);
             };
 
 

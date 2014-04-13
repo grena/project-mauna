@@ -125,12 +125,19 @@ define([
 
             it('Should have a dirty property and this property cannot be changed', function () {
 
-                var custom = new Service();
+                var custom = new Service({
+                    keys: {
+                        id: 'int'
+                    }
+                });
 
                 expect( custom.dirty ).toBe( false );
 
-            });
+                custom.id = 1;
 
+                expect( custom.dirty ).toBe( true );
+
+            });
         });
     });
 });
