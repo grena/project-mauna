@@ -80,7 +80,6 @@ define([
 
                                 setDirty(that, true);
 
-                                console.log(that.dirty);
                             }
                         });
                     });
