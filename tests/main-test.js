@@ -19,7 +19,8 @@ require.config({
         lodash           : '/base/public/vendor/lodash/dist/lodash',
         restangular      : '/base/public/vendor/restangular/dist/restangular',
 		'toastr'           : '../vendor/toastr/toastr.min',
-        angularMocks     : '/base/public/vendor/angular-mocks/angular-mocks'
+        angularMocks     : '/base/public/vendor/angular-mocks/angular-mocks',
+		moment: '/base/public/vendor/momentjs/moment'
     },
     shim:{
         angular: {exports:'angular'},
@@ -34,7 +35,8 @@ require.config({
 		toastr: {
 			exports:'toastr',
 			deps: ['jquery']
-		}
+		},
+		moment: {exports: 'moment'}
     },
 	deps: tests,
 	callback: window.__karma__.start

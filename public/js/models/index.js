@@ -6,9 +6,9 @@
 | Ainsi que les dépendences du module
 |--------------------------------------------------------------------------
 */
-define(['angular'], function (angular) {
+define(['angular', 'services'], function (angular, services) {
 
     'use strict';
 
-    return angular.module('app.models', ['restangular']);
+    return angular.module('app.models', ['restangular', services.name]);
 });

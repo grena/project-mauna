@@ -15,7 +15,8 @@ require.config({
         'restangular'      : '../vendor/restangular/dist/restangular.min',
         'toastr'           : '../vendor/toastr/toastr.min',
         'domReady'         : '../vendor/requirejs-domready/domReady',
-        'lodash'           : '../vendor/lodash/dist/lodash.min'
+        'lodash'           : '../vendor/lodash/dist/lodash.min',
+        'moment': '../vendor/momentjs/moment'
     },
     shim: {
         angular: {exports:'angular'},
@@ -26,6 +27,7 @@ require.config({
         toastr: {
             exports:'toastr',
             deps: ['jquery']
-        }
+        },
+        moment: {exports: 'moment'}
     }
 });
