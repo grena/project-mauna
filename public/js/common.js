@@ -16,14 +16,13 @@ require.config({
         'toastr'           : '../vendor/toastr/toastr.min',
         'domReady'         : '../vendor/requirejs-domready/domReady',
         'lodash'           : '../vendor/lodash/dist/lodash.min',
-        'moment': '../vendor/momentjs/moment'
+        'moment'           : '../vendor/momentjs/moment'
     },
     shim: {
         angular: {exports:'angular'},
         'angular-ui-router': ['angular'],
         bootstrap: ['jquery'],
         restangular: ['angular'],
-        // toastr : ['jquery']
         toastr: {
             exports:'toastr',
             deps: ['jquery']

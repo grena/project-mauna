@@ -4,6 +4,7 @@
 |--------------------------------------------------------------------------
 */
 define(['angular', 'services'], function (angular, services) {
+
     'use strict';
 
     var app = angular.module('app.routing', [services.name]);

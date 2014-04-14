@@ -7,6 +7,7 @@
 */
 
 require(['require', 'common'], function (require) {
+
     'use strict';
 
     // A cet instant le fichier common.js est chargé
