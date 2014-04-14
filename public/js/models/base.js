@@ -10,8 +10,22 @@ define([
 
     'use strict';
 
-    angular.module(model.name).service('Base', ['Helpers',
-        function (Helpers) {
+    angular.module(model.name).service('Base', ['Helpers', '$q', 'Restangular',
+        function (Helpers, $q, Restangular) {
+
+            /*
+            |--------------------------------------------------------------------------
+            | Methods:
+            |      - hydrate: hydrate attributes for an instance
+            |      - debug: display attributes list
+            |      - sync: make a request call to check if resource has been modified, update local if server changes
+            |      - save: save the model to server (can be an insert or an update)
+            |      - insert: insert a new entity
+            |      - update: update an entity
+            |      - remove: remove an entity on server and delete current item
+            |      - localSync: hydrate an instance with another
+            |--------------------------------------------------------------------------
+            */
 
             var setDirty = function (that, value) {
 
@@ -30,6 +44,8 @@ define([
             var Base = function (properties) {
 
                 var that   = this;
+
+                this.resourceName = this.resourceName || null;
 
                 Object.defineProperty(this, 'dirty', {
                     value: false,
@@ -53,6 +69,11 @@ define([
                 */
                 if ( _.has( properties, 'keys' ) ) {
 
+                    Object.defineProperty(this, 'keys', {
+                        value: _.keys( properties.keys ),
+                        enumerable: true
+                    });
+
                     _.forOwn( properties.keys, function ( type, name ) {
 
                         Object.defineProperty(that.attributes, name, {
@@ -62,7 +83,7 @@ define([
 
                         Object.defineProperty(that, name, {
                             get: function () {
-                                return Helpers.getTransformerAttribute(type)(that.attributes[name]);
+                                return that.attributes[name];
                             },
                             set: function (newValue) {
 
@@ -73,20 +94,21 @@ define([
 
                                 Object.defineProperty(that.attributes, name, {
                                     configurable: true,
-                                    value: newValue,
+                                    value: Helpers.getTransformerAttribute(type)(newValue),
                                     enumerable: true,
                                     writable: false
                                 });
 
-                                setDirty(that, true);
-
+                                if ( that.attributes[name] !== that.snapshot[name]) {
+                                    setDirty(that, true);
+                                }
                             }
                         });
                     });
 
                     if ( _.has( properties, 'values' ) ) {
                         this.hydrate( properties.values );
-                        this.snapshot();
+                        this.createSnapshot();
                     }
                 }
             };
@@ -116,7 +138,7 @@ define([
             | Snapshot the current values of the model and reset the dirty status
             |--------------------------------------------------------------------------
             */
-            Base.prototype.snapshot = function () {
+            Base.prototype.createSnapshot = function () {
 
                 Object.defineProperty( this, 'snapshot', {
                     configurable: true,
@@ -133,6 +155,34 @@ define([
                 setDirty(this, false);
             };
 
+            /*
+            |--------------------------------------------------------------------------
+            | Insert new entry in BDD
+            |--------------------------------------------------------------------------
+            */
+            Base.prototype.insert = function() {
+                var promise = $q.defer();
+
+                var THAT = this;
+
+                Restangular.all(this.resourceName).post(_.pick(THAT, function (value, key) {
+
+                    return ~THAT.keys.indexOf(key);
+
+                })).then(function (response) {
+
+                    angular.extend(THAT, response.item);
+
+                    promise.resolve(THAT);
+
+                }, function (response) {
+
+                    promise.reject(response);
+
+                });
+
+                return promise.promise;
+            };
 
             return Base;
         }
