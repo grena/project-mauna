@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html ng-app="app">
+<html>
 
     <head>
         <meta charset="utf-8">
@@ -11,21 +11,23 @@
         <link rel="stylesheet" href="/vendor/toastr/toastr.css">
         <link rel="stylesheet" href="/css/mauna.css">
 
-        <script src="vendor/angular/angular.min.js"></script>
+<!--         <script src="vendor/angular/angular.min.js"></script>
         <script src="vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="vendor/restangular/dist/restangular.min.js"></script>
         <script src="vendor/lodash/dist/lodash.min.js"></script>
-        <script src="vendor/toastr/toastr.min.js"></script>
-        <script src="js/app.js"></script>
+        <script src="vendor/toastr/toastr.min.js"></script> -->
+        <!-- <script src="js/app.js"></script> -->
+        <script data-main="js/main" src="vendor/requirejs/require.js"></script>
 
-        <script>
+<!--         <script>
             angular.module("app").constant("CSRF_TOKEN", '{% csrf_token() %}');
-        </script>
+        </script> -->
     </head>
 
     <body>
+        <input type="hidden" name="csrf_token" value="{% csrf_token() %}">
 
         <div class="container">
 

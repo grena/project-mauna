@@ -21,6 +21,8 @@ describe('unlog homepage', function() {
         expect(browser.getCurrentUrl()).toEqual(loginURL);
     });
 
+    it('Should have a required attribute on email and password', fail);
+    it('Should have a type email on email field', fail);
     it('should warn on missing/malformed credentials', fail);
     it('should accept a valid email address and password', fail);
     it('should return to the login page after logout', fail);
