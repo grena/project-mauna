@@ -41,7 +41,7 @@ define([
                 });
             };
 
-            var Base = function (properties) {
+            function Base (properties) {
 
                 var that   = this;
 
@@ -111,7 +111,7 @@ define([
                         this.createSnapshot();
                     }
                 }
-            };
+            }
 
             /*
             |--------------------------------------------------------------------------
@@ -160,11 +160,11 @@ define([
             | Insert new entry in BDD
             |--------------------------------------------------------------------------
             */
-            Base.prototype.insert = function() {
+            Base.prototype.insert = function () {
                 var promise = $q.defer();
 
                 var THAT = this;
-
+                
                 Restangular.all(this.resourceName).post(_.pick(THAT, function (value, key) {
 
                     return ~THAT.keys.indexOf(key);
@@ -182,6 +182,189 @@ define([
                 });
 
                 return promise.promise;
+            };
+
+            /*
+            |--------------------------------------------------------------------------
+            | Perform an update
+            |--------------------------------------------------------------------------
+            */
+            Base.prototype.update = function ( force ) {
+                var promise = $q.defer();
+
+                force = force || false;
+
+                var THAT = this;
+
+                if ( this.dirty || force ) {
+
+                    Restangular.one(this.resourceName, this.id).put(_.pick(THAT, function (value, key) {
+
+                        return ~THAT.keys.indexOf(key);
+
+                    })).then(function (response) {
+
+                        angular.extend(THAT, response.item);
+
+                        promise.resolve(THAT);
+
+                    }, function (response) {
+
+                        promise.reject(response);
+
+                    });
+
+                } else {
+                    promise.resolve(this);
+                }
+
+
+                return promise.promise;
+            };
+
+            Base.prototype.save = function() {
+
+                if ( this.id !== null && _.isUndefined( this.id ) ) {
+
+                    // Save as update
+                    return this.update();
+
+                }else{
+
+                    // Save as insert
+                    return this.insert();
+
+                }
+            };
+
+
+            Base.prototype.localSync = function(root, keys) {
+
+                var THAT = this;
+
+                if ( _.isUndefined(keys) || _.isEmpty(keys) ) {
+
+                    _.each( this.keys, function (value) {
+
+                        if ( ~ THAT.keys.indexOf(value) && _.has(root, value) ) {
+
+                            var vvv = _.clone(root[value]);
+
+                            THAT[value] = vvv;
+
+                        }
+
+                    });
+
+                    return;
+                }
+
+                _.each(keys, function (value) {
+
+                    if ( ~ THAT.keys.indexOf(value) && _.has(root, value) ) {
+
+                        var vvv = _.clone(root[value]);
+
+                        THAT[value] = vvv;
+                    }
+                });
+
+            };
+
+            Base.prototype.sync = function() {
+                var pro = $q.defer();
+
+                var THAT = this;
+
+                Restangular.one(this.resourceName, this.id).get().then(function (response) {
+
+                    THAT.localSync(response);
+
+                    pro.resolve();
+
+                }, function (response) {
+
+                    pro.reject(response);
+
+                });
+
+                return pro.promise;
+            };
+
+            Base.prototype.remove = function() {
+
+                var pro = $q.defer();
+
+                Restangular.one(this.resourceName, this.id).remove().then(function () {
+
+                    pro.resolve();
+
+                }, function (response) {
+
+                    pro.reject(response);
+
+                });
+
+                return pro.promise;
+            };
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Static methods
+            |--------------------------------------------------------------------------
+            */
+
+            /**
+             * Create a new Base on the server
+             * @param  Object data
+             * @return Promise
+             */
+            Base.create = function(data, Class) {
+                var promise = $q.defer();
+
+                var newEntity = new Class();
+                newEntity.hydrate(data);
+
+                newEntity.save().then(promise.resolve, promise.reject);
+
+                return promise.promise;
+            };
+            /**
+             * remove an Base on the server
+             * @return Promise
+             */
+            Base.remove = function(id, Class) {
+                var promise = $q.defer();
+
+                var newEntity = new Class({id:id});
+
+                newEntity.remove().then(promise.resolve, promise.reject);
+
+                return promise.promise;
+            };
+
+            Base.list = function(data, Class) {
+                var promise = $q.defer();
+
+                var newEntity = new Class();
+
+                Restangular.all(newEntity.resourceName).getList(data).then(function (response) {
+
+                    promise.resolve(response);
+
+                }, function (response) {
+                    promise.reject(response);
+                });
+
+                return promise.promise;
+            };
+
+            Base.prototype.debug = function() {
+                console.log(this.attributes);
+                // _.each(this.attributes, function (item, keys) {
+                //     console.log(keys, item );
+                // });
             };
 
             return Base;

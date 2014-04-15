@@ -37,13 +37,37 @@ define([
 
         describe('Base', function () {
 
-            var Service, $httpBackend;
+            var Service, $httpBackend, CustomEntity;
 
             beforeEach(inject(function ($injector) {
 
                 Service = $injector.get('Base');
 
                 $httpBackend = $injector.get('$httpBackend');
+
+                CustomEntity = function (data) {
+
+                    this.keys = {
+                        id: 'int'
+                    };
+
+                    Service.call(this, data);
+
+                };
+
+                /**
+                 * Create a new Entity on the server
+                 * @param  Object data
+                 * @return Promise
+                 */
+                var globalMethod = ['create', 'list', 'remove'];
+                _.each(globalMethod, function (methodName) {
+                    CustomEntity[methodName] = function (data) {
+                        return Service[methodName](data, CustomEntity);
+                    };
+                });
+
+                CustomEntity.prototype = _.create(Service.prototype, { 'constructor': CustomEntity });
 
             }));
 
@@ -220,12 +244,85 @@ define([
 
                 custom.resourceName = 'custom';
 
-                // Call login
-                var login = custom.insert();
+                custom.insert();
 
                 $httpBackend.flush();
 
                 expect( custom.id ).toEqual( 1 );
+            });
+
+            it('Should perform an update if dirty', function () {
+
+                var custom = new Service({
+                    keys: {
+                        id: 'int',
+                        name: 'string'
+                    },
+                    values: {
+                        id: 1,
+                        name: 'bisous'
+                    }
+                });
+
+                custom.resourceName = 'custom';
+
+                custom.update();
+
+                custom.name = 'bisous';
+
+                custom.update();
+
+                expect( custom.id ).toEqual( 1 );
+
+                $httpBackend.expectPUT('/custom/1');
+
+                $httpBackend.whenPUT('/custom/1').respond({item: {id: 1, name: 'simonAfter'}});
+
+                custom.name = 'simon';
+
+                custom.update();
+
+                expect( custom.name ).toEqual( 'simon' );
+
+                $httpBackend.flush();
+
+                expect( custom.name ).toEqual( 'simonAfter' );
+
+            });
+
+            it('Should perform an update if dirty', function () {
+
+                var custom = new Service({
+                    keys: {
+                        id: 'int',
+                        name: 'string'
+                    },
+                    values: {
+                        id: 1,
+                        name: 'bisous'
+                    }
+                });
+
+                custom.resourceName = 'custom';
+
+                $httpBackend.expectGET('/custom/1');
+
+                $httpBackend.whenGET('/custom/1').respond({id: 1, name: 'simon'});
+
+                custom.sync();
+
+                expect( custom.name ).toEqual( 'bisous' );
+
+                $httpBackend.flush();
+
+                expect( custom.name ).toEqual( 'simon' );
+
+            });
+
+            it('Should have a create method', function () {
+
+                expect( _.isUndefined( CustomEntity.create ) ).toBe( false );
+
             });
         });
     });
