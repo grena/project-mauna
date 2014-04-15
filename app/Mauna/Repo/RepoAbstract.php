@@ -1,0 +1,16 @@
+<?php namespace Mauna\Repo;
+
+/*
+|--------------------------------------------------------------------------
+| Abstract repository
+|--------------------------------------------------------------------------
+|
+| All repositories of the application extends from it.
+|
+*/
+
+abstract class RepoAbstract implements RepoInterface {
+
+    protected $model;
+
+}

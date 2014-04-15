@@ -46,15 +46,15 @@ define(['angular', 'services'], function (angular, services) {
                 controller: 'DashboardCtrl',
                 resolve: {
                     user: function(Restangular) {
-                        return Restangular.one('user', 1).get();
+                        return Restangular.one('users', 1).get();
                     },
                     settlers: function(Restangular) {
-                        return Restangular.one('user', 1).getList('settlers');
+                        return Restangular.one('users', 1).getList('settlers');
                     }
                 }
             });
 
-        $urlRouterProvider.otherwise('login');
+        $urlRouterProvider.otherwise('dashboard');
     });
 
     /*
