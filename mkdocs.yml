@@ -1,0 +1,5 @@
+site_name: Projet Mauna
+pages:
+- [index.md, Home]
+- ['install-development.md', 'Development']
+theme: readthedocs
