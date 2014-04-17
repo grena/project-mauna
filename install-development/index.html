@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Development - Projet Mauna</title>
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  
+
+  <script type="text/javascript" src="../js/theme.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  
+
+  <style>
+    body {font-size: 90%;}
+    pre, code {font-size: 100%;}
+    h3, h4, h5, h6 {color: #2980b9; font-weight: 300}
+  </style>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Projet Mauna</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+       <ul class="current">
+
+    <li class="toctree-l1 ">
+        <a class="" href="..">Home</a>
+        
+    </li>
+
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Development</a>
+        
+            <ul>
+            
+                <li class="toctree-l2"><a href="#requirements">Requirements</a></li>
+                
+            
+                <li class="toctree-l2"><a href="#installation">Installation</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+</ul>
+
+
+
+
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="icon icon-reorder"></i>
+        <a href=".."></a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    <li>Development</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <h2 id="requirements">Requirements</h2>
+<pre class="prettyprint well"><code>* Php5.4+ (php5.5 is recommended)
+* Mysql or postgreSQL
+* NodeJS latest stable version with NPM
+</code></pre>
+<h2 id="installation">Installation</h2>
+<pre class="prettyprint well"><code># run as root!
+apt-get update -y
+apt-get upgrade -y
+apt-get install sudo -y
+
+# Install vim and set as default editor
+sudo apt-get install -y vim
+sudo update-alternatives --set editor /usr/bin/vim.basic
+
+# Install Git
+sudo apt-get install -y git-core
+
+# Make sure Git is version 1.7.10 or higher, for example 1.7.12 or 1.8.4
+git --version
+
+# Cloning
+git clone git@github.com:grena/project-mauna.git -b develop
+
+cd project-mauna
+
+# Install base libraries
+sudo type node &gt;/dev/null 2&gt;&amp;1 || { echo &gt;&amp;2 &quot;Vous avez besoin de nodeJS&quot;; exit(0);} &amp;&amp; npm install -g bower
+sudo type composer &gt;/dev/null 2&gt;&amp;1 || { echo &gt;&amp;2 &quot;Vous avez besoin de composer&quot;; exit(0);} &amp;&amp; composer install -o
+
+npm i &amp;&amp; bower install
+
+# Database Setup
+
+# Secure your installation
+sudo mysql_secure_installation
+
+# Login to MySql
+mysql -u root -p
+
+# Create mauna user
+# Change $password with a good password
+mysql&gt; CREATE USER 'mauna'@'localhost' IDENTIFIED BY '$password';
+
+# Ensure you can use InnoDB
+mysql&gt; SET storage_engine=INNODB;
+
+# Create the mauna production database
+mysql&gt; CREATE DATABASE IF NOT EXISTS `mauna` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`;
+
+# Grant the mauna user necessary permissions on the table.
+mysql&gt; GRANT SELECT, LOCK TABLES, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER ON `mauna`.* TO 'mauna'@'localhost';
+
+# Quit the database session
+mysql&gt; \q
+
+# Create and edit config files
+cp app/config/database.php app/config/local/database.php &amp;&amp; editor app/config/local/database.php
+
+# Run migration
+php artisan migrate:install &amp;&amp; php artisan migrate --seed
+</code></pre>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    <!-- Copyright etc -->
+    </p>
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a>, using the <a href="https://github.com/snide/sphinx_rtd_theme">Read the Docs theme</a>.
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      <span><a href="" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      <span style="margin-left: 15px"><a href="" style="color: #fcfcfc">Next &raquo;</a></span>
+    </span>
+</div>
+</body>
+</html>
