@@ -6,4 +6,7 @@ pages:
 - ['buildings/social.md', 'Bâtiments', 'Sociaux']
 - ['buildings/environment.md', 'Bâtiments', 'Environnement']
 - ['buildings/energy.md', 'Bâtiments', 'Energie']
+- ['buildings/mines.md', 'Bâtiments', 'Mines']
 - ['buildings/miscellaneous.md', 'Bâtiments', 'Divers']
+- ['colony.md', 'Colonie']
+- ['asteroids.md', 'Astéroïdes']
