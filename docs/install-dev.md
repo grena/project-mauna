@@ -17,6 +17,7 @@ git clone git@github.com:grena/project-mauna.git -b develop
 ```
 cd project-mauna
 npm i && bower install
+composer install
 ```
 
 **Database Setup**
