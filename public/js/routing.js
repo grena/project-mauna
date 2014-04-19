@@ -14,12 +14,12 @@ define(['angular', 'services'], function (angular, services) {
     | This is our routing mapping
     |--------------------------------------------------------------------------
     */
-    app.config(function($stateProvider, $urlRouterProvider) {
+    app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
         $stateProvider
             .state('home', {
                 url: '/',
-                public: true,
+                public: false,
                 templateUrl: 'views/home.html'
             })
             .state('register', {
@@ -55,7 +55,7 @@ define(['angular', 'services'], function (angular, services) {
             });
 
         $urlRouterProvider.otherwise('dashboard');
-    });
+    }]);
 
     /*
     |--------------------------------------------------------------------------

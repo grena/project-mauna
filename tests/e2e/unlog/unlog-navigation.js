@@ -21,10 +21,40 @@ describe('unlog homepage', function() {
         expect(browser.getCurrentUrl()).toEqual(loginURL);
     });
 
-    it('Should have a required attribute on email and password', fail);
-    it('Should have a type email on email field', fail);
-    it('should warn on missing/malformed credentials', fail);
-    it('should accept a valid email address and password', fail);
+    it('Should have a required attribute on email and password', function () {
+        browser.get('/#/login');
+
+        var email = element(by.model('credentials.email'));
+        expect(email.getAttribute('required')).toBeDefined();
+
+    });
+
+    it('Should have a type email on email field', function () {
+        browser.get('/#/login');
+
+        var email = element(by.model('credentials.email'));
+        expect(email.getAttribute('type')).toEqual('email');
+
+    });
+
+    it('should warn on missing/malformed credentials', function () {
+        
+    });
+
+    it('should accept a valid email address and password', function () {
+        browser.get('/#/login');
+
+        var email = element(by.model('credentials.email'));
+        email.sendKeys('user@user.fr');
+
+        var password = element(by.model('credentials.password'));
+        password.sendKeys('password');
+
+        expect( email.getAttribute('class') ).toMatch('ng-valid');
+        expect( password.getAttribute('class') ).toMatch('ng-valid');
+
+    });
+
     it('should return to the login page after logout', fail);
     it('should return to the home page after login', fail);
 });

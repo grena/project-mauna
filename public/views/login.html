@@ -1,12 +1,12 @@
 <div id="login" class="row">
     <div class="col-md-4 col-md-offset-4 well">
-        <form class="form-horizontal" ng-submit="login()">
+        <form class="form-horizontal" name="loginForm" ng-submit="login()">
             <fieldset>
                 <legend>Authentification</legend>
                 <div class="form-group">
                     <label for="inputEmail" class="col-lg-2 control-label">Email</label>
                     <div class="col-lg-10">
-                        <input required ng-model="credentials.email" type="text" class="form-control input-sm" id="inputEmail" placeholder="Email" tabindex="1">
+                        <input required ng-model="credentials.email" type="email" class="form-control input-sm" id="inputEmail" placeholder="Email" tabindex="1">
                     </div>
                 </div>
                 <div class="form-group">
