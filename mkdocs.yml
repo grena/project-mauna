@@ -1,5 +1,9 @@
 site_name: Projet Mauna
+
 pages:
-- [index.md, Home]
-- ['install-development.md', 'Development']
-theme: readthedocs
+- ['index.md', 'Home']
+- ['install-dev.md', 'Development']
+- ['buildings/social.md', 'Bâtiments', 'Sociaux']
+- ['buildings/environment.md', 'Bâtiments', 'Environnement']
+- ['buildings/energy.md', 'Bâtiments', 'Energie']
+- ['buildings/miscellaneous.md', 'Bâtiments', 'Divers']
