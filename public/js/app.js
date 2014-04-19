@@ -32,11 +32,16 @@ define([
         models.name
     ]);
 
-    app.run(function($rootScope, $state, AuthenticationService) {
+    app.run(function($rootScope, $state, AuthenticationService, userFromServer, SessionService) {
 
+        if ( ! _.isNull( userFromServer ) ) {
+            if ( _.has(userFromServer, 'id') && _.has(userFromServer, 'activated') ) {
+                SessionService.set('authenticated', ( userFromServer.id && userFromServer.activated ) );
+            }
+        }
         // Let's check if the user is auth
         $rootScope.isAuthenticated = AuthenticationService.isLoggedIn();
-
+        
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 
             // If it's not a public route and the user is not authenticated, redirects him to login

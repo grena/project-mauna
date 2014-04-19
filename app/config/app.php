@@ -109,6 +109,7 @@ return array(
 		'Cartalyst\Sentry\SentryServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Mauna\Repo\RepoServiceProvider',
+		'Laracasts\Utilities\UtilitiesServiceProvider'
 
 	),
 

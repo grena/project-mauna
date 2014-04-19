@@ -13,6 +13,17 @@
 
 Route::get('/', function()
 {
+    $user = null;
+
+    if ( Sentry::check() )
+    {
+        $user = Sentry::getUser();
+    }
+
+    JavaScript::put([
+        'userFromServer' => $user
+    ]);
+
     return View::make('home');
 });
 
