@@ -24,11 +24,12 @@ composer install
 
 Don't forget to create the database for the project (MySQL or PostgreSQL), then :
 ```
+mkdir -p app/config/local
 cp app/config/database.php app/config/local/database.php
 ```
 Then edit you `app/config/local/database.php` to match your database credentials.
 
 **Run migration**
 ```
-php artisan migrate:install && php artisan migrate --seed
+php artisan migrate --seed
 ```
