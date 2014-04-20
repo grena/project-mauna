@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+
+        <title>Astéroïdes - Projet Mauna</title>
+
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../../css/prettify-1.0.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="../..">Projet Mauna</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="../..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bâtiments <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../../buildings/social/">Sociaux</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../buildings/environment/">Environnement</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../buildings/energy/">Energie</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../buildings/mines/">Mines</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../buildings/miscellaneous/">Divers</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../colony/">Colonie</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../../asteroids/">Astéroïdes</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Development <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../install/">Installation</a>
+                            </li>
+                        
+                            <li class="active">
+                                <a href="./">Astéroïdes</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                <li >
+                    <a rel="next" href="../install/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li class="disabled">
+                    <a rel="prev" >
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                
+            </ul>
+            
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#generation-des-tailles">Génération des tailles</a></li>
+        
+    
+        <li class="main "><a href="#generation-de-la-radioactivite">Génération de la radioactivité</a></li>
+        
+    
+        <li class="main "><a href="#generation-du-minerai">Génération du minerai</a></li>
+        
+            <li><a href="#facteurs-de-categorie">Facteurs de catégorie</a></li>
+        
+            <li><a href="#facteurs-de-type">Facteurs de type</a></li>
+        
+            <li><a href="#type-de-lasteroide">Type de l'astéroïde</a></li>
+        
+            <li><a href="#radioactivite-de-lasteroide">Radioactivité de l'astéroïde</a></li>
+        
+            <li><a href="#resume">Résumé</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<p>Cette catégorie rassemble les informations développeur quant à la génération / création / caractéristiques des astéroïdes.</p>
+<p><strong>Afin de laisser du suspens / du contenu à découvrir aux joueurs, il est évident que ces infos (algo de génération) doivent rester au sein de l'équipe de dev !!!</strong></p>
+<hr />
+<h2 id="generation-des-tailles">Génération des tailles</h2>
+<ul>
+<li>BETA : <strong>82%</strong></li>
+<li>Classe TITAN : <strong>16%</strong></li>
+<li>Géocroiseurs : <strong>1.7%</strong></li>
+<li>Archonte T30 : <strong>0.3%</strong> <em>(oui ils existent :D)</em></li>
+</ul>
+<h2 id="generation-de-la-radioactivite">Génération de la radioactivité</h2>
+<p>La radioactivité dépend du type d'astéroïde :</p>
+<ul>
+<li>BETA<ul>
+<li><strong>70%</strong> : <code>1 à 2</code></li>
+<li><strong>25%</strong> : <code>2 à 4</code></li>
+<li><strong>5%</strong> : <code>5</code></li>
+</ul>
+</li>
+<li>Classe TITAN<ul>
+<li><strong>70%</strong> : <code>4 à 7</code></li>
+<li><strong>25%</strong> : <code>7 à 9</code></li>
+<li><strong>5%</strong> : <code>11</code></li>
+</ul>
+</li>
+<li>Géoc<ul>
+<li><strong>70%</strong> : <code>7 à 9</code></li>
+<li><strong>25%</strong> : 10 à 12`</li>
+<li><strong>5%</strong> : <code>14</code></li>
+</ul>
+</li>
+<li>Archonte T30<ul>
+<li><strong>70%</strong> : <code>15 à 18</code></li>
+<li><strong>25%</strong> : <code>19 à 22</code></li>
+<li><strong>5%</strong> : <code>25</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="generation-du-minerai">Génération du minerai</h2>
+<p>Le minerai est généré selon plusieurs facteurs. En premier lieu, il y a le <strong>facteur de catégorie</strong> (Commun, Précieux, Rare). En second lieu, le <strong>facteur de type</strong> (le nom du minerai). Puis le <strong>type de l'astéroide</strong> et enfin <strong>la radioactivité</strong> sur ce dernier.</p>
+<h4 id="facteurs-de-categorie">Facteurs de catégorie</h4>
+<ul>
+<li>Communs<ul>
+<li><strong>60%</strong> : <code>25 à 150</code></li>
+<li><strong>30%</strong> : <code>100 à 200</code></li>
+<li><strong>10%</strong> : <code>150 à 250</code></li>
+</ul>
+</li>
+<li>Précieux<ul>
+<li><strong>60%</strong> : <code>2 à 10</code></li>
+<li><strong>30%</strong> : <code>6 à 13</code></li>
+<li><strong>10%</strong> : <code>13 à 20</code></li>
+</ul>
+</li>
+<li>Rares<ul>
+<li><strong>70%</strong> : <code>0 à 1</code></li>
+<li><strong>25%</strong> : <code>1 à 2</code></li>
+<li><strong>5%</strong> : <code>2 à 4</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="facteurs-de-type">Facteurs de type</h4>
+<ul>
+<li>Communs<ul>
+<li>Selenium<ul>
+<li><strong>70%</strong> : <code>+50 à +200</code></li>
+<li><strong>30%</strong> : <code>+201 à +250</code></li>
+</ul>
+</li>
+<li>Asteros<ul>
+<li><strong>70%</strong> : <code>+40 à +100</code></li>
+<li><strong>30%</strong> : <code>+101 à +150</code></li>
+</ul>
+</li>
+<li>Barium<ul>
+<li><strong>70%</strong> : <code>+20 à +70</code></li>
+<li><strong>30%</strong> : <code>+71 à +100</code></li>
+</ul>
+</li>
+<li>Crystalite<ul>
+<li><strong>70%</strong> : <code>+10 à +30</code></li>
+<li><strong>30%</strong> : <code>+31 à +50</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Précieux<ul>
+<li>Quazinc<ul>
+<li><strong>70%</strong> : <code>+4 à +20</code></li>
+<li><strong>30%</strong> : <code>+21 à +30</code></li>
+</ul>
+</li>
+<li>Bytanium<ul>
+<li><strong>70%</strong> : <code>+2 à +16</code></li>
+<li><strong>30%</strong> : <code>+17 à +25</code></li>
+</ul>
+</li>
+<li>Korellium<ul>
+<li><strong>70%</strong> : <code>+1 à +14</code></li>
+<li><strong>30%</strong> : <code>+15 à +20</code></li>
+</ul>
+</li>
+<li>Dragonium<ul>
+<li><strong>70%</strong> : <code>+1 à +6</code></li>
+<li><strong>30%</strong> : <code>+7 à +10</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Rares<ul>
+<li>Traxium<ul>
+<li><strong>80%</strong> : <code>+0 à +1</code></li>
+<li><strong>20%</strong> : <code>+2 à +3</code></li>
+</ul>
+</li>
+<li>Nexos<ul>
+<li><strong>90%</strong> : <code>+0</code></li>
+<li><strong>10%</strong> : <code>+1 à +2</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="type-de-lasteroide">Type de l'astéroïde</h4>
+<p>Selon la taille de l'astéroïde, un multiplicateur est appliqué aux unités de minerai :</p>
+<ul>
+<li>BETA : <strong>x 1</strong></li>
+<li>Classe TITAN : <strong>x 2.3</strong></li>
+<li>Géoc : <strong>x 5.8</strong></li>
+<li>Archonte T30 : <strong>x 12</strong></li>
+</ul>
+<h4 id="radioactivite-de-lasteroide">Radioactivité de l'astéroïde</h4>
+<p>Selon la radioactivité de l'astéroïde, un multiplicateur est appliqué aux unités de minerai :</p>
+<pre class="prettyprint well"><code>mult_radio = ((radioactivite * 10) + 100) / 100
+</code></pre>
+
+<h4 id="resume">Résumé</h4>
+<p>La génération de minerai est donc défini comme ceci :</p>
+<pre class="prettyprint well"><code>(rand(categorie) + rand(type)) * typeAsteroide * mult_radio
+</code></pre>
+
+</div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../../js/prettify-1.0.min.js"></script>
+        <script src="../../js/base.js"></script>
+        
+    </body>
+</html>
