@@ -97,7 +97,7 @@ class EloquentAsteroid extends RepoAbstract implements RepoInterface, AsteroidIn
         foreach( $types as $type )
         {
             $currentRatio = 0;
-            $rand         = mt_float_rand(0, 100, 1);
+            $rand         = mt_rand(0, 100);
             $ratio        = 0;
 
             /*
@@ -111,7 +111,7 @@ class EloquentAsteroid extends RepoAbstract implements RepoInterface, AsteroidIn
 
                 if ( $rand <= $current )
                 {
-                    $ratio = mt_float_rand( $factor[0], $factor[1], 1 );
+                    $ratio = mt_rand( $factor[0], $factor[1] );
                     break;
                 }
             }
