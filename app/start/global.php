@@ -82,3 +82,12 @@ require app_path().'/filters.php';
 
 Blade::setEscapedContentTags('{%%', '%%}');
 Blade::setContentTags('{%', '%}');
+
+/*
+|--------------------------------------------------------------------------
+| Require custom Helpers
+|--------------------------------------------------------------------------
+|
+*/
+
+require app_path().'/helpers/helpers.php';

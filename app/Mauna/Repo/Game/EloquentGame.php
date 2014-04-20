@@ -1,7 +1,7 @@
 <?php namespace Mauna\Repo\Game;
 
-use FD\Repo\RepoAbstract;
-use FD\Repo\RepoInterface;
+use Mauna\Repo\RepoAbstract;
+use Mauna\Repo\RepoInterface;
 
 class EloquentGame extends RepoAbstract implements RepoInterface, GameInterface {
 

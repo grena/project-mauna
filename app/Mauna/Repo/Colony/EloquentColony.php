@@ -1,7 +1,7 @@
 <?php namespace Mauna\Repo\Colony;
 
-use FD\Repo\RepoAbstract;
-use FD\Repo\RepoInterface;
+use Mauna\Repo\RepoAbstract;
+use Mauna\Repo\RepoInterface;
 
 class EloquentColony extends RepoAbstract implements RepoInterface, ColonyInterface {
 

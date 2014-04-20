@@ -8,7 +8,7 @@ Cette catégorie rassemble les informations développeur quant à la génératio
 
 - BETA : **82%**
 - Classe TITAN : **16%**
-- Géocroiseurs : **1.7%**
+- Géocroiseur : **1.7%**
 - Archonte T30 : **0.3%** _(oui ils existent :D)_
 
 ## Génération de la radioactivité
@@ -23,9 +23,9 @@ La radioactivité dépend du type d'astéroïde :
     - **70%** : `4 à 7`
     - **25%** : `7 à 9`
     - **5%** : `11`
-- Géoc
+- Géocroiseur
     - **70%** : `7 à 9`
-    - **25%** : 10 à 12`
+    - **25%** : `10 à 12`
     - **5%** : `14`
 - Archonte T30
     - **70%** : `15 à 18`
@@ -93,7 +93,7 @@ Selon la taille de l'astéroïde, un multiplicateur est appliqué aux unités de
 
 - BETA : **x 1**
 - Classe TITAN : **x 2.3**
-- Géoc : **x 5.8**
+- Géocroiseur : **x 5.8**
 - Archonte T30 : **x 12**
 
 #### Radioactivité de l'astéroïde
