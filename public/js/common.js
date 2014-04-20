@@ -11,6 +11,7 @@ require.config({
         'angular'          : '../vendor/angular/angular.min',
         'angular-ui-router': '../vendor/angular-ui-router/release/angular-ui-router.min',
         'jquery'           : '../vendor/jquery/jquery.min',
+        'bootflat'         : '../vendor/Bootflat/bootflat/js/icheck.min',
         'bootstrap'        : '../vendor/bootstrap/dist/js/bootstrap.min',
         'restangular'      : '../vendor/restangular/dist/restangular.min',
         'toastr'           : '../vendor/toastr/toastr.min',
