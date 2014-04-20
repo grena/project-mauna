@@ -1,7 +1,7 @@
 <?php namespace Mauna\Repo\BuildingBlueprint;
 
-use FD\Repo\RepoAbstract;
-use FD\Repo\RepoInterface;
+use Mauna\Repo\RepoAbstract;
+use Mauna\Repo\RepoInterface;
 
 class EloquentBuildingBlueprint extends RepoAbstract implements RepoInterface, BuildingBlueprintInterface {
 

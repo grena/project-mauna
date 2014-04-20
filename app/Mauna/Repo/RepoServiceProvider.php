@@ -2,6 +2,21 @@
 
 use Illuminate\Support\ServiceProvider;
 
+use Mauna\Repo\User\EloquentUser;
+use \User;
+use Mauna\Repo\Asteroid\EloquentAsteroid;
+use \Asteroid;
+use Mauna\Repo\Building\EloquentBuilding;
+use \Building;
+use Mauna\Repo\BuildingBlueprint\EloquentBuildingBlueprint;
+use \BuildingBlueprint;
+use Mauna\Repo\Colony\EloquentColony;
+use \Colony;
+use Mauna\Repo\Settler\EloquentSettler;
+use \Settler;
+use Mauna\Repo\Game\EloquentGame;
+use \Game;
+
 class RepoServiceProvider extends ServiceProvider {
 
     public function register()

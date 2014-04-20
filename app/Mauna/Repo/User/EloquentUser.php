@@ -1,7 +1,7 @@
 <?php namespace Mauna\Repo\User;
 
-use FD\Repo\RepoAbstract;
-use FD\Repo\RepoInterface;
+use Mauna\Repo\RepoAbstract;
+use Mauna\Repo\RepoInterface;
 
 class EloquentUser extends RepoAbstract implements RepoInterface, UserInterface {
 

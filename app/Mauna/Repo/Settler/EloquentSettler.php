@@ -1,7 +1,7 @@
 <?php namespace Mauna\Repo\Settler;
 
-use FD\Repo\RepoAbstract;
-use FD\Repo\RepoInterface;
+use Mauna\Repo\RepoAbstract;
+use Mauna\Repo\RepoInterface;
 
 class EloquentSettler extends RepoAbstract implements RepoInterface, SettlerInterface {
 
