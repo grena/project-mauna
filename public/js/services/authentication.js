@@ -43,6 +43,21 @@ define(['angular', 'services/index', 'toastr'], function (angular, services, toa
 
                 return logout;
             },
+            register: function(user) {
+                var register = $http.post("/auth/register", user);
+
+                register.success(function(response) {
+                    toastr.success(response.flash);
+                    cacheSession();
+                    $rootScope.isAuthenticated = true;
+                });
+
+                register.error(function(response) {
+                    toastr.error(response.flash, 'Erreur !');
+                });
+
+                return register;
+            },
             isLoggedIn: function() {
                 return SessionService.get('authenticated');
             }

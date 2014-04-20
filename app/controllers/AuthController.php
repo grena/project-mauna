@@ -79,6 +79,8 @@ class AuthController extends BaseController {
                 'activated' => true,
             ));
 
+            return Response::json(['flash' => 'Votre recensement a bien été pris en compte par TetraCorp&trade;'], 200);
+
             // Find the group using the group id
             // $adminGroup = Sentry::findGroupById(1);
 
