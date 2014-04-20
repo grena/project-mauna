@@ -15,6 +15,8 @@ class CreateAsteroidsTable extends Migration {
 		Schema::create('asteroids', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('game_id')->unsigned()->index();
+			$table->string('type');
+			$table->integer('radioactivity')->unsigned();
 			$table->timestamps();
 
 			$table->foreign('game_id')

@@ -12,6 +12,8 @@ use Mauna\Repo\BuildingBlueprint\EloquentBuildingBlueprint;
 use \BuildingBlueprint;
 use Mauna\Repo\Colony\EloquentColony;
 use \Colony;
+use Mauna\Repo\Ore\EloquentOre;
+use \Ore;
 use Mauna\Repo\Settler\EloquentSettler;
 use \Settler;
 use Mauna\Repo\Game\EloquentGame;
@@ -30,7 +32,9 @@ class RepoServiceProvider extends ServiceProvider {
 
         $app->bind('Mauna\Repo\Asteroid\AsteroidInterface', function($app)
         {
-            return new EloquentAsteroid(new Asteroid);
+            $oreRepo = App::make('Mauna\Repo\Ore\OreInterface');
+
+            return new EloquentAsteroid(new Asteroid, $oreRepo);
         });
 
         $app->bind('Mauna\Repo\Building\BuildingInterface', function($app)
@@ -46,6 +50,11 @@ class RepoServiceProvider extends ServiceProvider {
         $app->bind('Mauna\Repo\Colony\ColonyInterface', function($app)
         {
             return new EloquentColony(new Colony);
+        });
+
+        $app->bind('Mauna\Repo\Ore\OreInterface', function ( $app )
+        {
+            return new EloquentOre( new Ore );
         });
 
         $app->bind('Mauna\Repo\Settler\SettlerInterface', function($app)

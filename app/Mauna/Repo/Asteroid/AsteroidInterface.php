@@ -2,6 +2,7 @@
 
 use Mauna\Repo\RepoInterface;
 use \Asteroid;
+use \Ore;
 
 interface AsteroidInterface extends RepoInterface {
 
@@ -22,10 +23,19 @@ interface AsteroidInterface extends RepoInterface {
     public function generateRadioactivity( Asteroid $asteroid );
 
     /**
-     * Generates minerals for the asteroid
+     * Generates ores for the asteroid
      *
      * @param  Asteroid $asteroid Asteroid to modify
-     * @return Asteroid with minerals
+     * @return Asteroid with ores
      */
-    public function generateMinerals( Asteroid $asteroid );
+    public function generateOres( Asteroid $asteroid );
+
+    /**
+     * Register a ore
+     * @param Asteroid $asteroid Asteroid to modify
+     * @param Ore $ore Ore to use
+     * @return bool
+     */
+    public function registerOre( Asteroid $asteroid, Ore $ore );
+
 }

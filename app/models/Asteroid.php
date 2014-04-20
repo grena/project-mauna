@@ -32,4 +32,14 @@ class Asteroid extends Eloquent {
         return $this->hasOne('Colony');
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | An Asteroid has many Ores
+    |--------------------------------------------------------------------------
+    */
+    public function ores()
+    {
+        return $this->hasMany('Ore');
+    }
+
 }

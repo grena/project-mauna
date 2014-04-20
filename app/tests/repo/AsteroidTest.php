@@ -15,10 +15,16 @@ class AsteroidTest extends TestCase
 
         $asteroid = m::mock(new Asteroid);
         $asteroid->shouldReceive('newInstance')->andReturn($asteroid);
-        $asteroid->shouldReceive('save')->andReturnNull();
 
         $this->app->instance('Asteroid', $asteroid);
-        $this->repo = new Mauna\Repo\Asteroid\EloquentAsteroid( App::make('Asteroid') );
+
+        $mineralRepo = m::mock(App::make('Mauna\Repo\Ore\OreInterface'));
+        $this->app->instance('Mauna\Repo\Ore\OreInterface', $mineralRepo);
+
+        $this->repo = new Mauna\Repo\Asteroid\EloquentAsteroid(
+            App::make('Asteroid'),
+            App::make('Mauna\Repo\Ore\OreInterface')
+        );
     }
 
     public function tearDown()
@@ -87,5 +93,50 @@ class AsteroidTest extends TestCase
         $astero = $repo->make();
 
         $astero = $repo->generateRadioactivity( $astero );
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function test_generate_radioactivity_throw()
+    {
+        $repo = $this->getRepository();
+
+        $astero = $repo->make();
+
+        $astero = $repo->generateRadioactivity( $astero );
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function test_generate_minerals_throw()
+    {
+        $repo = $this->getRepository();
+
+        $astero = $repo->make();
+
+        $astero = $repo->generateRadioactivity( $astero );
+        $astero = $repo->generateOres( $astero );
+    }
+
+    public function test_generate_minerals()
+    {
+        $repo = $this->getRepository();
+
+        $astero = $repo->make();
+
+        $astero->game_id = 1;
+
+        $astero = $repo->generateType( $astero );
+
+        $astero = $repo->generateRadioactivity( $astero );
+
+        $astero = $repo->generateOres( $astero );
+
+        $count = $astero->ores()->count();
+
+        Should::eq($count, count( Config::get('ores.types') ) );
+        
     }
 }

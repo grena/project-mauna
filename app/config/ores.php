@@ -4,14 +4,26 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Information and caracteristics about Minerals
+    | Information and caracteristics about Ores
     |--------------------------------------------------------------------------
     |
-    | Here you may specify information and caracteristics about minerals.
+    | Here you may specify information and caracteristics about ores.
     | Usefull for defining constants and gameplay changes.
     |
     */
     'types' => [
+        'selenium'   => 1,
+        'asteros'    => 2,
+        'barium'     => 3,
+        'crystalite' => 4,
+        'quazinc'    => 5,
+        'bytanium'   => 6,
+        'korellium'  => 7,
+        'dragonium'  => 8,
+        'traxium'    => 9,
+        'nexos'      => 10,
+    ],
+    'categories' => [
         'common'   => [
             'name' => 'common',
             'ratio' => [
@@ -19,7 +31,7 @@ return [
                 30 => [100, 200],
                 10 => [150, 250]
             ],
-            'minerals' => [
+            'ores' => [
                 'selenium' => [
                     70 => [50, 200],
                     30 => [201, 250]
@@ -45,7 +57,7 @@ return [
                 30 => [6, 13],
                 10 => [13, 20]
             ],
-            'minerals' => [
+            'ores' => [
                 'quazinc' => [
                     70 => [4, 20],
                     30 => [21, 30]
@@ -71,7 +83,7 @@ return [
                 25 => [1, 2],
                 5  => [2, 4]
             ],
-            'minerals' => [
+            'ores' => [
                 'traxium' => [
                     80 => [0, 1],
                     20 => [2, 3]

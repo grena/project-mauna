@@ -2,16 +2,21 @@
 
 use Mauna\Repo\RepoAbstract;
 use Mauna\Repo\RepoInterface;
+use Mauna\Repo\Ore\OreInterface;
 use \Asteroid;
-
+use \Ore;
 use \Config;
 use \Exception;
+use \InvalidArgumentException;
 
 class EloquentAsteroid extends RepoAbstract implements RepoInterface, AsteroidInterface {
 
-    public function __construct( Asteroid $asteroid )
+    protected $ore;
+
+    public function __construct( Asteroid $asteroid, OreInterface $ore )
     {
         $this->model = $asteroid;
+        $this->ore   = $ore;
     }
 
     /**
@@ -52,7 +57,7 @@ class EloquentAsteroid extends RepoAbstract implements RepoInterface, AsteroidIn
     {
         if ( ! $asteroid->type )
         {
-            throw new \InvalidArgumentException( __METHOD__ . ' : Cannot generate radioactivity on an Asteroid without type' );
+            throw new InvalidArgumentException( __METHOD__ . ' : Cannot generate radioactivity on an Asteroid without type' );
         }
 
         $config = array_first(Config::get('asteroids.types'), function($k, $config) use ($asteroid) {
@@ -62,7 +67,7 @@ class EloquentAsteroid extends RepoAbstract implements RepoInterface, AsteroidIn
         $current = 0;
         $rand = mt_rand(0, 100);
 
-        foreach($config['radioactivity'] as $percent => $values)
+        foreach( $config['radioactivity'] as $percent => $values)
         {
             list($min, $max) = $values;
 
@@ -79,22 +84,29 @@ class EloquentAsteroid extends RepoAbstract implements RepoInterface, AsteroidIn
     }
 
     /**
-     * Generates minerals for the asteroid
+     * Generates ores for the asteroid
      *
      * @param  Asteroid $asteroid Asteroid to modify
-     * @return Asteroid with minerals
+     * @return Asteroid with ores
      */
-    public function generateMinerals( Asteroid $asteroid )
+    public function generateOres( Asteroid $asteroid )
     {
         if ( ! $asteroid->type )
         {
-            throw new Exception( __METHOD__ . ' : Cannot generate minerals on an Asteroid without type' );
+            throw new InvalidArgumentException( __METHOD__ . ' : Cannot generate ores on an Asteroid without type' );
+        }
+
+        if ( ! $asteroid->radioactivity )
+        {
+            throw new InvalidArgumentException( __METHOD__ . ' : Cannot generate ores on an Asteroid without radioactivity' );
         }
 
         // Formulas : (rand(categorie) + rand(type)) * typeAsteroide * mult_radio
-        $types = Config::get('minerals.types');
+        $categories = Config::get('ores.categories');
 
-        foreach( $types as $type )
+        $typeAsteroid = Config::get("asteroids.types.$asteroid->type");
+
+        foreach( $categories as $categorie )
         {
             $currentRatio = 0;
             $rand         = mt_rand(0, 100);
@@ -105,16 +117,68 @@ class EloquentAsteroid extends RepoAbstract implements RepoInterface, AsteroidIn
             | Generate type ratio
             |--------------------------------------------------------------------------
             */
-            foreach( $type['ratio'] as $percent => $factor)
+            foreach( $categorie['ratio'] as $purcent => $factor)
             {
-                $current += $percent;
+                $currentRatio += $purcent;
 
-                if ( $rand <= $current )
+                if ( $rand <= $currentRatio )
                 {
                     $ratio = mt_rand( $factor[0], $factor[1] );
                     break;
                 }
             }
+
+            /*
+            |--------------------------------------------------------------------------
+            | Generate Ores
+            |--------------------------------------------------------------------------
+            */
+            foreach ( $categorie['ores'] as $type => $ratios)
+            {
+                $currentRatio = 0;
+                $rand         = mt_rand(0, 100);
+                $ratioOre = 0;
+
+                foreach ( $ratios as $purcent => $factor)
+                {
+                    $currentRatio += $purcent;
+
+                    if ( $rand <= $currentRatio )
+                    {
+                        $ratioOre = mt_rand( $factor[0], $factor[1]);
+                        break;
+                    }
+                }
+
+                $amount = ( $ratio + $ratioOre ) * $typeAsteroid['ore_multiplier'] * $asteroid->radioactivity;
+
+                $ore = $this->ore->make( [
+                    'type'         => Config::get("ores.types.$type"),
+                    'start_amount' => $amount,
+                    'amount'       => $amount
+                ]);
+
+                $this->registerOre( $asteroid, $ore );
+            }
         }
+        return $asteroid;
+    }
+
+    /**
+     * Register a ore
+     * @param Asteroid $asteroid Asteroid to modify
+     * @param Ore $ore Ore to use
+     * @return bool
+     */
+    public function registerOre( Asteroid $asteroid, Ore $ore )
+    {
+        if ( ! $asteroid->id )
+        {
+            $asteroid->save();
+        }
+
+        $ore->asteroid_id = $asteroid->id;
+
+        return $ore->save();
     }
 }
