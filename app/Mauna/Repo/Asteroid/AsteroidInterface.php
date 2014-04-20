@@ -20,4 +20,12 @@ interface AsteroidInterface extends RepoInterface {
      * @return Asteroid with the radioactivity
      */
     public function generateRadioactivity( Asteroid $asteroid );
+
+    /**
+     * Generates minerals for the asteroid
+     *
+     * @param  Asteroid $asteroid Asteroid to modify
+     * @return Asteroid with minerals
+     */
+    public function generateMinerals( Asteroid $asteroid );
 }
