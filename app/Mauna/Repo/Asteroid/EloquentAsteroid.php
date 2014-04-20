@@ -52,12 +52,12 @@ class EloquentAsteroid extends RepoAbstract implements RepoInterface, AsteroidIn
     {
         if ( ! $asteroid->type )
         {
-            throw new Exception( __METHOD__ . ' : Cannot generate radioactivity on an Asteroid without type' );
+            throw new \InvalidArgumentException( __METHOD__ . ' : Cannot generate radioactivity on an Asteroid without type' );
         }
 
         $config = array_first(Config::get('asteroids.types'), function($k, $config) use ($asteroid) {
             return $config['key'] == $asteroid->type;
-        });;
+        });
 
         $current = 0;
         $rand = mt_rand(0, 100);
@@ -105,9 +105,9 @@ class EloquentAsteroid extends RepoAbstract implements RepoInterface, AsteroidIn
             | Generate type ratio
             |--------------------------------------------------------------------------
             */
-            foreach( $type['ratio'] as $purcent => $factor)
+            foreach( $type['ratio'] as $percent => $factor)
             {
-                $current += $purcent;
+                $current += $percent;
 
                 if ( $rand <= $current )
                 {

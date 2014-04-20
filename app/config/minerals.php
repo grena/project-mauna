@@ -13,7 +13,6 @@ return [
     */
     'types' => [
         'common'   => [
-            'key' => 't1',
             'name' => 'common',
             'ratio' => [
                 60 => [25, 150],
@@ -40,7 +39,6 @@ return [
             ]
         ],
         'precious' => [
-            'key' => 't2',
             'name' => 'precious',
             'ratio' => [
                 60 => [2, 10],
@@ -67,7 +65,6 @@ return [
             ]
         ],
         'rare'     => [
-            'key' => 't3',
             'name' => 'rare',
             'ratio' => [
                 70 => [0, 1],
