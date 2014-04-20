@@ -73,7 +73,7 @@ class EloquentAsteroid extends RepoAbstract implements RepoInterface, AsteroidIn
 
             $current += $percent;
 
-            if($rand <= $current)
+            if( $rand <= $current )
             {
                 $asteroid->radioactivity = mt_rand($min, $max);
                 break;
