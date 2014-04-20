@@ -2,7 +2,6 @@ site_name: Projet Mauna
 
 pages:
 - ['index.md', 'Home']
-- ['install-dev.md', 'Development']
 - ['buildings/social.md', 'Bâtiments', 'Sociaux']
 - ['buildings/environment.md', 'Bâtiments', 'Environnement']
 - ['buildings/energy.md', 'Bâtiments', 'Energie']
@@ -10,3 +9,5 @@ pages:
 - ['buildings/miscellaneous.md', 'Bâtiments', 'Divers']
 - ['colony.md', 'Colonie']
 - ['asteroids.md', 'Astéroïdes']
+- ['development/install.md', 'Development', 'Installation']
+- ['development/asteroids.md', 'Development', 'Astéroïdes']
