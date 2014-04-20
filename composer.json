@@ -11,7 +11,10 @@
 		"laracasts/utilities": " 1.0"
 	},
 	"require-dev": {
-	    "way/generators": "2.*"
+	    "way/generators": "2.*",
+		"mockery/mockery": "dev-master",
+		"way/laravel-test-helpers": "dev-master",
+		"phpunit/phpunit": "3.7.*"
 	},
 	"autoload": {
 		"classmap": [
