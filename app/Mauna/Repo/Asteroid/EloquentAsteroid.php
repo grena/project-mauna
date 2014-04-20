@@ -54,8 +54,26 @@ class EloquentAsteroid extends RepoAbstract implements RepoInterface, AsteroidIn
             throw new Exception(__METHOD__ . ' : Cannot generate radioactivity on an Asteroid without type');
         }
 
-        // TODO
+        $config = array_first(Config::get('asteroids.types'), function($k, $config) use ($asteroid) {
+            return $config['key'] == $asteroid->type;
+        });;
 
-        $types = Config::get('asteroids.types');
+        $current = 0;
+        $rand = mt_rand(0, 100);
+
+        foreach($config['radioactivity'] as $percent => $values)
+        {
+            list($min, $max) = $values;
+
+            $current += $percent;
+
+            if($rand <= $current)
+            {
+                $asteroid->radioactivity = mt_rand($min, $max);
+                break;
+            }
+        }
+
+        return $asteroid;
     }
 }
