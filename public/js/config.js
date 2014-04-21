@@ -17,7 +17,9 @@ define(['angular'], function (angular) {
 
     });
 
-    app.config(['RestangularProvider', '$provide', function (RestangularProvider, $provide) {
+    app.config(['RestangularProvider', '$provide', 'cfpLoadingBarProvider', function (RestangularProvider, $provide, cfpLoadingBarProvider) {
+
+        cfpLoadingBarProvider.includeSpinner = true;
 
         /*
         |--------------------------------------------------------------------------

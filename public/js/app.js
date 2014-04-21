@@ -7,6 +7,9 @@ define([
     'factories',
     'controllers',
     'models',
+    'ngAnimate',
+    'ngFx',
+    'loadingBar',
     'angular-ui-router',
     'jquery',
     'bootstrap',
@@ -24,7 +27,10 @@ define([
     |--------------------------------------------------------------------------
     */
     var app = angular.module('app', [
+        'ngAnimate',
+        'fx.animations',
         'ui.router',
+        'chieffancypants.loadingBar',
         'restangular',
         config.name,
         routing.name,
@@ -43,7 +49,7 @@ define([
 
                 User.current = new User( userFromServer );
             }
-            
+
         }
         // Let's check if the user is auth
         $rootScope.isAuthenticated = AuthenticationService.isLoggedIn();

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/vendor/toastr/toastr.css">
     <link rel="stylesheet" href="/vendor/Bootflat/bootflat/css/bootflat.min.css">
+    <link rel="stylesheet" href="/vendor/angular-loading-bar/src/loading-bar.css">
     <link rel="stylesheet" href="/css/mauna.css">
     <link rel="stylesheet" href="/css/app.css">
 </head>

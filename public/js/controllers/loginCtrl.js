@@ -16,6 +16,10 @@ define([
         '$scope', '$state', 'AuthenticationService', 'User',
         function ($scope, $state, AuthenticationService) {
 
+            if ( AuthenticationService.isLoggedIn() ) {
+                $state.transitionTo('dashboard');
+            }
+            
             $scope.credentials = {
                 email    : '',
                 password : '',

@@ -21,7 +21,9 @@
     "toastr": "~2.0.1",
     "requirejs": "~2.1.11",
     "requirejs-domready": "~2.0.1",
-    "Bootflat": "~2.0.1"
+    "Bootflat": "~2.0.1",
+    "ng-Fx": "~0.2.9",
+    "angular-loading-bar": "~0.4.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.16"
