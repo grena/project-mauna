@@ -11,3 +11,4 @@ pages:
 - ['asteroids.md', 'Astéroïdes']
 - ['development/install.md', 'Development', 'Installation']
 - ['development/asteroids.md', 'Development', 'Astéroïdes']
+- ['development/colony.md', 'Development', 'Colonie']

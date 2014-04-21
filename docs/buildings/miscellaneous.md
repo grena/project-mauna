@@ -1,5 +1,5 @@
 ### Unité de Conservation de Colonie (U.C.C.)
-**Description** : Ce bâtiment ne peut être construit que lors de l'implantation d'une nouvelle colonie sur un astéroïde inhabité. Après en avoir reçu l'ordre, le Transporteur le construit automatiquement à condition que vous disposiez des fonds nécessaires. L'UCC permet d'établir un niveau minimum de survie avant la construction de bâtiments plus spécifiques. A noter également que ce bâtiment est amené à être remplacé par les autres bâtiments construits. La production d'air, de nourriture et d'eau diminue d'une unité jusqu'à atteindre zéro.
+**Description** : Ce bâtiment ne peut être construit que lors de l'implantation d'une nouvelle colonie sur un astéroïde inhabité. Après en avoir reçu l'ordre, le Transporteur le construit automatiquement. L'UCC permet d'établir un niveau minimum de survie avant la construction de bâtiments plus spécifiques. A noter également que ce bâtiment est amené à être remplacé par les autres bâtiments construits. La production d'air, de nourriture et d'eau diminue d'une unité jusqu'à atteindre zéro.
 
 **Résumé** : Unité de Conversation de Colonie (UCC).
 
