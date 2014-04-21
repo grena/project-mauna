@@ -45,11 +45,12 @@ define(['angular', 'services'], function (angular, services) {
                 templateUrl: 'views/dashboard.html',
                 controller: 'DashboardCtrl',
                 resolve: {
-                    user: function(Restangular, userFromServer) {
-                        return Restangular.one('users', userFromServer.id).get();
+                    user: function(Restangular, User) {
+                        console.log(User.current);
+                        return Restangular.one('users', User.current.id).get();
                     },
-                    settlers: function(Restangular, userFromServer) {
-                        return Restangular.one('users', userFromServer.id).getList('settlers');
+                    settlers: function(Restangular, User) {
+                        return Restangular.one('users', User.current.id).getList('settlers');
                     }
                 }
             })

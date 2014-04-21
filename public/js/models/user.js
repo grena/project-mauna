@@ -16,7 +16,7 @@ define([
 
 
 
-            var User = function ( values ) {
+            function User ( values ) {
 
                 var data = {
                     keys: {
@@ -43,7 +43,7 @@ define([
                 this.resourceName = 'users';
 
                 Base.call(this, data);
-            };
+            }
 
             /**
              * Create a new Entity on the server

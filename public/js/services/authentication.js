@@ -26,9 +26,7 @@ define(['angular', 'services/index', 'toastr'], function (angular, services, toa
                 login.success(function(response) {
                     cacheSession();
 
-                    userFromServer = angular.copy(response.userItem);
-
-                    User.current = new User(userFromServer);
+                    User.current = new User(response);
 
                     $rootScope.isAuthenticated = true;
 
@@ -72,7 +70,7 @@ define(['angular', 'services/index', 'toastr'], function (angular, services, toa
                     $rootScope.isAuthenticated = true;
 
                     userFromServer = angular.copy(response.userItem);
-                    
+
                     User.current = new User(userFromServer);
 
                     pro.resolve();
