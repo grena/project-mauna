@@ -52,6 +52,16 @@ define(['angular', 'services'], function (angular, services) {
                         return Restangular.one('users', userFromServer.id).getList('settlers');
                     }
                 }
+            })
+            .state('profile', {
+                url: '/profile/{user_id:[0-9]*}',
+                templateUrl: 'views/users/profile.html',
+                controller: 'ProfileUserViewCtrl',
+                resolve: {
+                    profileUser: function ($stateParams, Restangular) {
+                        return Restangular.one('users', $stateParams.user_id).get();
+                    }
+                }
             });
 
         $urlRouterProvider.otherwise('dashboard');

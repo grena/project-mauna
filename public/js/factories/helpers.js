@@ -3,11 +3,11 @@
 | Session service
 |--------------------------------------------------------------------------
 */
-define(['angular', 'services/index', 'moment'], function (angular, services, moment) {
+define(['angular', 'factories/index', 'moment'], function (angular, factories, moment) {
 
     'use strict';
 
-    angular.module(services.name).service('Helpers', function() {
+    angular.module(factories.name).service('Helpers', function() {
 
         this.getTransformerAttribute = function (type) {
 

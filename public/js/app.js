@@ -4,6 +4,7 @@ define([
     'config',
     'routing',
     'services',
+    'factories',
     'controllers',
     'models',
     'angular-ui-router',
@@ -32,12 +33,17 @@ define([
         models.name
     ]);
 
-    app.run(function($rootScope, $state, AuthenticationService, userFromServer, SessionService) {
+    app.run(function($rootScope, $state, AuthenticationService, userFromServer, SessionService, User) {
 
         if ( ! _.isNull( userFromServer ) ) {
+
             if ( _.has(userFromServer, 'id') && _.has(userFromServer, 'activated') ) {
+
                 SessionService.set('authenticated', ( userFromServer.id && userFromServer.activated ) );
+
+                User.current = new User( userFromServer );
             }
+            
         }
         // Let's check if the user is auth
         $rootScope.isAuthenticated = AuthenticationService.isLoggedIn();

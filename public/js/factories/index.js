@@ -1,15 +1,10 @@
 /*
 |--------------------------------------------------------------------------
-| Services
+| Factories
 |--------------------------------------------------------------------------
 */
-define([
-    'services/index',
-    'services/session',
-    'services/authentication'
-], function (service) {
+define(['angular'], function (angular) {
 
     'use strict';
-    
-    return service;
+    return angular.module('app.factories', []);
 });

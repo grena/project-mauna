@@ -11,10 +11,11 @@ define([
     'controllers/homeCtrl',
     'controllers/registerCtrl',
     'controllers/loginCtrl',
-    'controllers/navBarCtrl'
+    'controllers/navBarCtrl',
+    'controllers/profileUserViewCtrl'
 ], function (controller) {
 
     'use strict';
-    
+
     return controller;
 });

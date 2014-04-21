@@ -122,7 +122,6 @@ define([
             Base.prototype.hydrate = function (data) {
 
                 var that = this;
-
                 _.forOwn( data, function ( value, key ) {
 
                     if ( _.has( that.attributes, key ) ) {
@@ -164,7 +163,7 @@ define([
                 var promise = $q.defer();
 
                 var THAT = this;
-                
+
                 Restangular.all(this.resourceName).post(_.pick(THAT, function (value, key) {
 
                     return ~THAT.keys.indexOf(key);

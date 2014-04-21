@@ -3,9 +3,8 @@
 | Services
 |--------------------------------------------------------------------------
 */
-define(['angular'], function (angular) {
+define(['angular', 'exports', 'models'], function (angular, exports, models) {
 
     'use strict';
-
-    return angular.module('app.services', []);
+    return angular.module('app.services', [models.name]);
 });

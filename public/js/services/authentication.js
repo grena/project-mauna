@@ -7,7 +7,7 @@ define(['angular', 'services/index', 'toastr'], function (angular, services, toa
 
     'use strict';
 
-    angular.module(services.name).factory('AuthenticationService', function($rootScope, $q, $http, SessionService) {
+    angular.module(services.name).factory('AuthenticationService', function($rootScope, $q, $http, SessionService, User) {
 
         var cacheSession = function() {
             SessionService.set('authenticated', true);
@@ -25,7 +25,11 @@ define(['angular', 'services/index', 'toastr'], function (angular, services, toa
 
                 login.success(function(response) {
                     cacheSession();
+
                     userFromServer = angular.copy(response.userItem);
+
+                    User.current = new User(userFromServer);
+
                     $rootScope.isAuthenticated = true;
 
                     promise.resolve();
@@ -43,26 +47,45 @@ define(['angular', 'services/index', 'toastr'], function (angular, services, toa
 
                 logout.success(function(response) {
                     toastr.success(response.flash);
+
                     uncacheSession();
+
                     $rootScope.isAuthenticated = false;
+
+                    userFromServer = null;
+
+                    User.current = null;
                 });
 
                 return logout;
             },
             register: function(user) {
+                var pro = $q.defer();
+
                 var register = $http.post("/auth/register", user);
 
                 register.success(function(response) {
                     toastr.success(response.flash);
+
                     cacheSession();
+
                     $rootScope.isAuthenticated = true;
+
+                    userFromServer = angular.copy(response.userItem);
+                    
+                    User.current = new User(userFromServer);
+
+                    pro.resolve();
+
                 });
 
                 register.error(function(response) {
                     toastr.error(response.flash, 'Erreur !');
+
+                    pro.reject();
                 });
 
-                return register;
+                return pro.promise;
             },
             isLoggedIn: function() {
                 return SessionService.get('authenticated');

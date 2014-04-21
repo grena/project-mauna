@@ -1,17 +1,16 @@
 /*
 |--------------------------------------------------------------------------
-| Models
-| Liste tous les models disponibles et retourne le module principal
+| Factories
+| Liste tous les factories disponibles et retourne le module principal
 |--------------------------------------------------------------------------
 */
 
 define([
-    'models/index',
-    'models/base',
-    'models/user'
-], function (model) {
+    'factories/index',
+    'factories/helpers'
+], function (factories) {
 
     'use strict';
 
-    return model;
+    return factories;
 });
