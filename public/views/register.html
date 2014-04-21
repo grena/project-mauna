@@ -29,8 +29,14 @@
                     <label for="inputPasswordConfirmation" class="col-sm-2 control-label">Confirmation</label>
                     <div class="col-sm-10">
                         <input type="password" class="form-control input-sm" id="inputPasswordConfirmation" placeholder="Password" ng-model="user.password_confirmation">
+                        <div class="m-t-xs">
+                            <label>
+                                <input type="checkbox" ng-model="credentials.remember"> Rester connecté
+                            </label>
+                        </div>
                     </div>
                 </div>
+
                 <hr>
                 <div class="form-group">
                     <label for="inputPassword" class="col-sm-2 control-label">Vaccinations</label>

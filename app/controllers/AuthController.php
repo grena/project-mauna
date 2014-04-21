@@ -87,8 +87,8 @@ class AuthController extends BaseController {
             ));
 
             $credentials = ['email' => $user->email, 'password' => $input['password']];
-            
-            $user = Sentry::authenticate($credentials, false);
+
+            $user = Sentry::authenticate($credentials, ( isset($input['remember']) and $input['remember']) );
 
             return Response::json([
                 'flash' => 'Votre recensement a bien été pris en compte par TetraCorp&trade;',
