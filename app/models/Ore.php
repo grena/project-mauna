@@ -2,7 +2,7 @@
 
 class Ore extends Eloquent {
 	protected $fillable = [
-		'type', 'start_amount', 'amount'
+		'type', 'initial_amount', 'amount'
 	];
 
 }

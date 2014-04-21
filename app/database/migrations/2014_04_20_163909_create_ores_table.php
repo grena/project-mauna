@@ -16,7 +16,7 @@ class CreateOresTable extends Migration {
 			$table->increments('id');
 			$table->integer('asteroid_id')->unsigned()->index();
 			$table->integer('type')->unsigned()->index();
-			$table->integer('start_amount')->unsigned();
+			$table->integer('initial_amount')->unsigned();
 			$table->integer('amount')->unsigned();
 			$table->timestamps();
 

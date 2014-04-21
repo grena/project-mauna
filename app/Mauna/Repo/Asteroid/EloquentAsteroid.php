@@ -153,9 +153,9 @@ class EloquentAsteroid extends RepoAbstract implements RepoInterface, AsteroidIn
                 $amount = ( $ratio + $ratioOre ) * $typeAsteroid['ore_multiplier'] * $asteroid->radioactivity;
 
                 $ore = $this->ore->make( [
-                    'type'         => Config::get("ores.types.$type"),
-                    'start_amount' => $amount,
-                    'amount'       => $amount
+                    'type'           => Config::get("ores.types.$type"),
+                    'initial_amount' => $amount,
+                    'amount'         => $amount
                 ]);
 
                 $this->registerOre( $asteroid, $ore );
