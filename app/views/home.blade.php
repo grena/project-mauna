@@ -19,13 +19,6 @@
     <input type="hidden" name="csrf_token" value="{% csrf_token() %}">
 
     <div class="container">
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3 text-center" style="padding:30px;">
-                <h3><a href="{% url('/') %}">The Mauna Project</a></h3>
-                <div class="clearfix"></div>
-                <small>Un projet qu'il est plutôt bien!</small>
-            </div>
-        </div>
 
         <div ng-include="'views/navbar.html'"></div>
 
