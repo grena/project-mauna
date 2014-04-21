@@ -9,6 +9,8 @@ define([
 
         $scope.loggedIn = $rootScope.isAuthenticated;
 
+        $scope.rootUrl = angular.copy(window.rootUrl);
+
         $rootScope.$watch('isAuthenticated', function(value) {
             $scope.loggedIn = value;
         });

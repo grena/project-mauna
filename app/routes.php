@@ -10,6 +10,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+JavaScript::put(['rootUrl' => url('/')]);
 
 Route::get('/', function()
 {

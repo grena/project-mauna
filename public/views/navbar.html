@@ -1,5 +1,14 @@
+<div ng-controller="NavbarCtrl">
 
-    <div ng-show="loggedIn" class="navbar navbar-default" ng-controller="NavbarCtrl">
+    <div class="row" ng-hide="loggedIn">
+        <div class="col-sm-6 col-sm-offset-3 text-center" style="padding:30px;">
+            <h3><a ng-href="rootUrl">The Mauna Project</a></h3>
+            <div class="clearfix"></div>
+            <small>Un projet qu'il est plutôt bien!</small>
+        </div>
+    </div>
+
+    <div ng-show="loggedIn" class="navbar navbar-default">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
                 <span class="icon-bar"></span>
@@ -35,3 +44,4 @@
             </ul>
         </div>
     </div>
+</div>
