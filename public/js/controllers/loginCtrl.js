@@ -13,8 +13,8 @@ define([
     'use strict';
 
     angular.module(controller.name).controller('LoginCtrl', [
-        '$scope', '$state', 'AuthenticationService',
-        function ($scope, $state, AuthenticationService) {
+        '$scope', '$state', 'AuthenticationService', 'User', 'userFromServer',
+        function ($scope, $state, AuthenticationService, User, userFromServer) {
 
             $scope.credentials = {
                 email    : '',
@@ -44,6 +44,7 @@ define([
 
                 AuthenticationService.login($scope.credentials)
                     .then(function() {
+                        User.current = new User( userFromServer );
                         $state.transitionTo('dashboard');
                     }, function(response) {
                         $scope.load = false;
