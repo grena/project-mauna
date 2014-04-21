@@ -7,7 +7,7 @@ define(['angular', 'services/index', 'toastr'], function (angular, services, toa
 
     'use strict';
 
-    angular.module(services.name).factory('AuthenticationService', function($rootScope, $http, SessionService) {
+    angular.module(services.name).factory('AuthenticationService', function($rootScope, $q, $http, SessionService) {
 
         var cacheSession = function() {
             SessionService.set('authenticated', true);
@@ -19,18 +19,24 @@ define(['angular', 'services/index', 'toastr'], function (angular, services, toa
 
         return {
             login: function(credentials) {
+                var promise = $q.defer();
+
                 var login = $http.post("/auth/login", credentials);
 
-                login.success(function() {
+                login.success(function(response) {
                     cacheSession();
+                    userFromServer = angular.copy(response.userItem);
                     $rootScope.isAuthenticated = true;
+
+                    promise.resolve();
                 });
 
                 login.error(function(response) {
                     toastr.error(response.flash, 'Erreur !');
+                    promise.reject();
                 });
 
-                return login;
+                return promise.promise;
             },
             logout: function() {
                 var logout = $http.get("/auth/logout");

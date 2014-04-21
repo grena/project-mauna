@@ -61,12 +61,19 @@ class AuthController extends BaseController {
         {
             $input = Input::all();
 
-            $validation = [
-                'email' => 'required|email',
-                'password' => 'required'
+            $messages = [
+                'password.confirmed'    => 'La confirmation du mot de passe n\'est pas correcte.',
+                'password.min'    => 'Le mot de passe doit être d\'une longueur de :min.',
+                'between' => 'The :attribute must be between :min - :max.',
+                'in'      => 'The :attribute must be one of the following types: :values',
             ];
 
-            $validator = Validator::make($input, $validation);
+            $validation = [
+                'email'    => 'required|email',
+                'password' => 'required|confirmed|min:6'
+            ];
+
+            $validator = Validator::make($input, $validation, $messages);
 
             if($validator->fails()) {
                 return Response::json(['flash' => $validator->messages()->first()], 500);
@@ -79,29 +86,31 @@ class AuthController extends BaseController {
                 'activated' => true,
             ));
 
-            return Response::json(['flash' => 'Votre recensement a bien été pris en compte par TetraCorp&trade;'], 200);
+            $credentials = ['email' => $user->email, 'password' => $input['password']];
+            
+            $user = Sentry::authenticate($credentials, false);
 
-            // Find the group using the group id
-            // $adminGroup = Sentry::findGroupById(1);
+            return Response::json([
+                'flash' => 'Votre recensement a bien été pris en compte par TetraCorp&trade;',
+                'userItem' => $user->toArray()
+            ], 200);
 
-            // Assign the group to the user
-            // $user->addGroup($adminGroup);
         }
         catch (Cartalyst\Sentry\Users\LoginRequiredException $e)
         {
-            return Response::json(['flash' => 'Login field is required.'], 500);
+            return Response::json(['flash' => 'Un email est obligatoire.'], 500);
         }
         catch (Cartalyst\Sentry\Users\PasswordRequiredException $e)
         {
-            return Response::json(['flash' => 'Password field is required.'], 500);
+            return Response::json(['flash' => 'Un mot de passe est obligatoire.'], 500);
         }
         catch (Cartalyst\Sentry\Users\UserExistsException $e)
         {
-            return Response::json(['flash' => 'User with this login already exists.'], 500);
+            return Response::json(['flash' => 'Cet email est déjà utilisé.'], 500);
         }
         catch (Cartalyst\Sentry\Groups\GroupNotFoundException $e)
         {
-            return Response::json(['flash' => 'Group was not found.'], 500);
+            return Response::json(['flash' => 'Le groupe n\'a pas été trouvé.'], 500);
         }
     }
 

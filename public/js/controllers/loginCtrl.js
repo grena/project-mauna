@@ -17,8 +17,9 @@ define([
         function ($scope, $state, AuthenticationService) {
 
             $scope.credentials = {
-                email : '',
-                password : ''
+                email    : '',
+                password : '',
+                password_confirmation: ''
             };
 
             $scope.load = false;
