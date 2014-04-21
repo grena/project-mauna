@@ -161,11 +161,13 @@ class EloquentAsteroid extends RepoAbstract implements RepoInterface, AsteroidIn
                 $this->registerOre( $asteroid, $ore );
             }
         }
+
         return $asteroid;
     }
 
     /**
      * Register a ore
+     *
      * @param Asteroid $asteroid Asteroid to modify
      * @param Ore $ore Ore to use
      * @return bool
