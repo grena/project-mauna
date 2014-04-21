@@ -9,7 +9,6 @@ define([
     'angular-ui-router',
     'jquery',
     'bootstrap',
-    'bootflat',
     'restangular',
     'toastr',
     'lodash'

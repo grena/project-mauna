@@ -1,5 +1,5 @@
 <div id="register" class="row">
-    <div class="col-md-6 col-md-offset-3 well">
+    <div class="col-sm-8 col-sm-offset-2 well">
         <div class="alert alert-dismissable alert-info">
             <strong><i class="fa fa-info-circle"></i> Information :</strong> Les citoyens déjà recensés sont invités à <a href="#/login" class="alert-link">s'identifier</a>.
         </div>
@@ -14,50 +14,50 @@
                 </div>
                 <hr>
                 <div class="form-group">
-                    <label for="inputEmail" class="col-lg-2 control-label">Email</label>
-                    <div class="col-lg-10">
+                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
                         <input type="text" class="form-control input-sm" id="inputEmail" placeholder="Email" ng-model="user.email">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputPassword" class="col-lg-2 control-label">Password</label>
-                    <div class="col-lg-10">
+                    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
                         <input type="password" class="form-control input-sm" id="inputPassword" placeholder="Password" ng-model="user.password">
                     </div>
                 </div>
                 <hr>
                 <div class="form-group">
-                    <label for="inputPassword" class="col-lg-2 control-label">Vaccinations</label>
-                    <div class="col-lg-5">
-                        <div class="checkbox">
-                            <label>
+                    <label for="inputPassword" class="col-sm-2 control-label">Vaccinations</label>
+                    <div class="col-sm-5">
+                        <div class="m-t-xs">
+                            <label class="font-thin">
                                 <input type="checkbox" checked="checked"> Salmonelle de l'espace
                             </label>
                         </div>
-                        <div class="checkbox">
-                            <label>
+                        <div class="m-t-xs">
+                            <label class="font-thin">
                                 <input type="checkbox" checked="checked"> Encore une autre
                             </label>
                         </div>
-                        <div class="checkbox">
-                            <label>
+                        <div class="m-t-xs">
+                            <label class="font-thin">
                                 <input type="checkbox" checked="checked"> Phobie interplixienne
                             </label>
                         </div>
                     </div>
-                    <div class="col-lg-5">
-                        <div class="checkbox">
-                            <label>
+                    <div class="col-sm-5">
+                        <div class="m-t-xs">
+                            <label class="font-thin">
                                 <input type="checkbox" checked="checked"> Salmonelle de l'espace
                             </label>
                         </div>
-                        <div class="checkbox">
-                            <label>
+                        <div class="m-t-xs">
+                            <label class="font-thin">
                                 <input type="checkbox" checked="checked"> Encore une autre
                             </label>
                         </div>
-                        <div class="checkbox">
-                            <label>
+                        <div class="m-t-xs">
+                            <label class="font-thin">
                                 <input type="checkbox" checked="checked"> Phobie interplixienne
                             </label>
                         </div>
@@ -65,10 +65,10 @@
                 </div>
                 <hr>
                 <div class="form-group">
-                    <label for="inputPassword" class="col-lg-2 control-label">Charte</label>
-                    <div class="col-lg-10">
-                        <div class="checkbox">
-                            <label>
+                    <label for="inputPassword" class="col-sm-2 control-label">Charte</label>
+                    <div class="col-sm-10">
+                        <div class="m-t-xs">
+                            <label class="font-thin">
                                 <input type="checkbox" ng-model="terms"> J'autorise la TetraCorp&trade; à analyser ces informations et à me promouvoir officiellement <strong>colon de grade Alpha</strong>.
                             </label>
                         </div>
@@ -76,7 +76,7 @@
                 </div>
                 <hr>
                 <div class="form-group">
-                    <div class="col-lg-12 text-center">
+                    <div class="col-sm-12 text-center">
                         <button type="submit" class="ma-button" ng-click="register()" ng-disabled="load || !terms"><i class="fa fa-check"></i> Valider mon recensement <i class="fa fa-spin fa-cog" ng-show="load"></i></button>
                     </div>
                 </div>
