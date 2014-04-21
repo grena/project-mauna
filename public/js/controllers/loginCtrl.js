@@ -43,10 +43,9 @@ define([
                 $scope.load = true;
 
                 AuthenticationService.login($scope.credentials)
-                    .success(function() {
+                    .then(function() {
                         $state.transitionTo('dashboard');
-                    })
-                    .error(function(response) {
+                    }, function(response) {
                         $scope.load = false;
                     });
             };
